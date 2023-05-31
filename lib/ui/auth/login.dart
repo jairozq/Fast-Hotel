@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           body: Container(
             
-            decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/fondo1.png'),fit: BoxFit.cover)),
+            decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/fondologin.png'),fit: BoxFit.cover)),
             child: ListView.builder(
               itemCount: 1,
               itemBuilder: (BuildContext context, int index) {
