@@ -51,16 +51,17 @@ class RegisterHotel extends StatelessWidget {
     }
 
     return Container(
-        /*decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/images/.png'), fit: BoxFit.cover),
-      ),*/
         child: Scaffold(
-            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-            body: ListView.builder(
-              itemCount: 1,
-              itemBuilder: (BuildContext context, int index) {
-                return SingleChildScrollView(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/fondoRH.png'), fit: BoxFit.cover),
+        ),
+        child: ListView.builder(
+          itemCount: 1,
+          itemBuilder: (BuildContext context, int index) {
+            return SingleChildScrollView(
               child: Column(children: [
                 Container(
                   alignment: Alignment.topCenter,
@@ -300,27 +301,29 @@ class RegisterHotel extends StatelessWidget {
                   ],
                 ),
                 /*Wrap(alignment: WrapAlignment.center,
-              children: [
-                Container(
-                width: MediaQuery.of(context).size.height*0.5,
-                height: MediaQuery.of(context).size.height*0.1,
-                child:TextField(
-                  controller: imagen,
-                  decoration: InputDecoration(
-                    fillColor: Colors.grey.shade100,
-                    filled: true,
-                    hintText: 'Ingrese el enlace de su imagen',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                children: [
+                  Container(
+                  width: MediaQuery.of(context).size.height*0.5,
+                  height: MediaQuery.of(context).size.height*0.1,
+                  child:TextField(
+                    controller: imagen,
+                    decoration: InputDecoration(
+                      fillColor: Colors.grey.shade100,
+                      filled: true,
+                      hintText: 'Ingrese el enlace de su imagen',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
-                )
-              ),
-              ],),*/
+                  )
+                ),
+                ],),*/
                 /*pathImage!=null? Image.file(pathImage,width: 20,height: 20,):*/
               ]),
             );
-              },
-            ),));
+          },
+        ),
+      ),
+    ));
   }
 }
