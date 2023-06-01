@@ -18,10 +18,7 @@ class RegisterHotel extends StatelessWidget {
     TextEditingController habitaciones = TextEditingController();
     TextEditingController user = TextEditingController();
     TextEditingController pass = TextEditingController();
-    //TextEditingController imagen = TextEditingController();
-    //String? imagenName;
     String? imagen64;
-    File? pathImage;
 
     Future selImage(op) async {
       XFile? selectImage;
@@ -34,16 +31,13 @@ class RegisterHotel extends StatelessWidget {
       }
 
       if (selectImage == null) {
-        //imagenName  = null;
         imagen64 = null;
       } else {
         final pathImage = File(selectImage.path);
-        //final nameImage = (pathImage.toString()).split("/").last.split("'")[0];
         final formaImage = (pathImage.toString()).split(".").last.split("'")[0];
         final bitImage = pathImage.readAsBytesSync();
         final base64 = base64Encode(bitImage);
         String imageFinal = "data:image/$formaImage;base64,$base64";
-        //imagenName = nameImage;
         imagen64 = imageFinal;
       }
 
@@ -66,8 +60,8 @@ class RegisterHotel extends StatelessWidget {
                 Container(
                   alignment: Alignment.topCenter,
                   margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.04,
-                      bottom: MediaQuery.of(context).size.height * 0.01),
+                      top: MediaQuery.of(context).size.height * 0.01,
+                      bottom: MediaQuery.of(context).size.height * 0.06),
                   child: Text(
                     "Ingrese los datos del hotel",
                     style: TextStyle(
@@ -79,8 +73,8 @@ class RegisterHotel extends StatelessWidget {
                 Column(
                   children: [
                     Container(
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        height: MediaQuery.of(context).size.height * 0.8,
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        height: MediaQuery.of(context).size.height * 0.75,
                         child: Column(
                           children: [
                             TextField(
@@ -247,7 +241,6 @@ class RegisterHotel extends StatelessWidget {
                             ),
                             FilledButton(
                                 onPressed: () {
-                                  //print("voy a crear el hotel: $imagen64");
                                   controlh
                                       .crearHotel(
                                           nombre.text,
@@ -263,7 +256,7 @@ class RegisterHotel extends StatelessWidget {
                                         duration: const Duration(seconds: 3),
                                         icon: const Icon(Icons.info),
                                         shouldIconPulse: true,
-                                        backgroundColor: Colors.green);
+                                        backgroundColor: Colors.red);
                                   });
                                 },
                                 child: Text(
@@ -275,9 +268,6 @@ class RegisterHotel extends StatelessWidget {
                                               0.035,
                                       fontFamily: 'alkbold'),
                                 )),
-                            const SizedBox(
-                              height: 20,
-                            )
                           ],
                         )),
                     Row(
@@ -289,7 +279,6 @@ class RegisterHotel extends StatelessWidget {
                           child: const Text(
                             'Inicio',
                             style: TextStyle(
-                              decoration: TextDecoration.underline,
                               fontFamily: 'alksemb',
                               fontSize: 18,
                               color: Color.fromARGB(255, 0, 174, 187),
