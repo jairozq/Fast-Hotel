@@ -3,12 +3,25 @@ import 'package:fasthotel/domain/controller/controllerHotel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ListHoteles extends StatelessWidget {
+class ListHoteles extends StatefulWidget {
   const ListHoteles({super.key});
 
   @override
+  State<ListHoteles> createState() => _ListHotelesState();
+}
+
+String? actualpage;
+
+class _ListHotelesState extends State<ListHoteles> {
+  @override
   Widget build(BuildContext context) {
-    TextEditingController search = TextEditingController();
+    //TextEditingController search = TextEditingController();
+
+    void onItemTapped(int index) {
+      setState(() {
+        actualpage = "$index";
+      });
+    }
 
     decodeimage(imagen) {
       var imagen64 = (imagen).split(",")[1];
@@ -50,7 +63,7 @@ class ListHoteles extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               itemCount: controlh.listarHotel!.length,
-              itemBuilder: (BuildContext context, int index) {
+              itemBuilder: (BuildContext context, int idex) {
                 return Container(
                   alignment: AlignmentDirectional.center,
                   width: MediaQuery.of(context).size.width,
@@ -66,16 +79,16 @@ class ListHoteles extends StatelessWidget {
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 0.2,
                               child: Image.memory(decodeimage(
-                                  controlh.listarHotel![index].imagen)),
+                                  controlh.listarHotel![idex].imagen)),
                             ),
                             Row(
                               children: [
-                                Text(controlh.listarHotel![index].nombre),
+                                Text(controlh.listarHotel![idex].nombre),
                               ],
                             ),
                             Row(
                               children: [
-                                Text(controlh.listarHotel![index].descripcion),
+                                Text(controlh.listarHotel![idex].descripcion),
                               ],
                             ),
                           ],
@@ -88,7 +101,7 @@ class ListHoteles extends StatelessWidget {
             ),
           ),
           //menu inferior
-          Container(
+          /*Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.1,
             decoration: BoxDecoration(border: Border.all()),
@@ -161,8 +174,36 @@ class ListHoteles extends StatelessWidget {
                     )),
               ],
             ),
-          )
+          )*/
           //fin menu
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.purple,
+        selectedLabelStyle: const TextStyle(fontFamily: "alksemb"),
+        selectedFontSize: MediaQuery.of(context).size.width * 0.04,
+        unselectedLabelStyle: const TextStyle(fontFamily: "alksemb"),
+        unselectedFontSize: MediaQuery.of(context).size.width * 0.03,
+        currentIndex: actualpage == null ? 0 : int.parse(actualpage!),
+        onTap: onItemTapped,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Inicio",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.assignment_rounded),
+            label: "Reservas",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_box_rounded),
+            label: "Perfil",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_box_rounded),
+            label: "Perfil",
+          ),
         ],
       ),
     );

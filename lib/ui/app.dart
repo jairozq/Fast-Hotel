@@ -2,7 +2,7 @@ import 'package:fasthotel/ui/auth/login.dart';
 import 'package:fasthotel/ui/auth/registerHotel.dart';
 import 'package:fasthotel/ui/auth/registerUser.dart';
 import 'package:fasthotel/ui/content/hotelResults.dart';
-import 'package:fasthotel/ui/content/listHotels.dart';
+import 'package:fasthotel/ui/content/pageHome.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +14,9 @@ class App extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Crud Usando HTTP',
-      theme: ThemeData(primarySwatch: Colors.purple), //colorScheme: const ColorScheme.highContrastLight(background: Colors.white)
+      theme: ThemeData(
+          primarySwatch: Colors
+              .purple), //colorScheme: const ColorScheme.highContrastLight(background: Colors.white)
       initialRoute: '/login',
       routes: {
         "/listHotels": (context) => const ListHoteles(),
