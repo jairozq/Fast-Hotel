@@ -84,7 +84,6 @@ class ListHoteles extends StatelessWidget {
                     ],
                   ),
                 );
-                ;
               },
             ),
           ),
