@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:fasthotel/domain/models/hotel.dart';
 import 'package:fasthotel/domain/models/utiles.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class PeticionesHotel {
@@ -16,8 +15,6 @@ class PeticionesHotel {
       'habitaciones': habitaciones,
       'foto': foto
     });
-    print(response.statusCode);
-    print(response);
     return compute(convertirAlista, response.body);
   }
 
@@ -43,9 +40,11 @@ class PeticionesHotel {
     return compute(convertirAlista2, response.body);
   }
 
-  static List<Hotel> convertirAlista2(String responsebody) {
-    final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
-    return pasar.map<Hotel>((json) => Hotel.desdeJson(json)).toList();
+  static Future<List<Hotel>> filtrarHoteles(String nombre) async {
+    var url = Uri.parse("https://fatshotel.000webhostapp.com/filtrarHotel.php");
+    final response = await http.post(url, body: {'nombre': nombre});
+
+    return compute(convertirAlista2, response.body);
   }
 
   static Future<List<Hotel>> obtenerId(String user) async {
@@ -54,5 +53,10 @@ class PeticionesHotel {
     final response = await http.post(url, body: {'user': user});
 
     return compute(convertirAlista2, response.body);
+  }
+
+  static List<Hotel> convertirAlista2(String responsebody) {
+    final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
+    return pasar.map<Hotel>((json) => Hotel.desdeJson(json)).toList();
   }
 }

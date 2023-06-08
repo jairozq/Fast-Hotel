@@ -1,3 +1,4 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fasthotel/domain/controller/controllerHotel.dart';
 import 'package:fasthotel/domain/controller/controllerUser.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,11 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  void guardaId(String iduser) async {
+    SharedPreferences dato = await SharedPreferences.getInstance();
+    dato.setString("idG", iduser);
+  }
+
   @override
   Widget build(BuildContext context) {
     ControlUser controlu = Get.find();
@@ -104,11 +110,14 @@ class _LoginState extends State<Login> {
                                         shouldIconPulse: true,
                                         backgroundColor: Colors.red);
                                   } else {
+                                    guardaId(controlu
+                                        .listarAccessLogin![0].iduser
+                                        .toString());
                                     if (controlu
                                             .listarAccessLogin![0].tipocuenta ==
                                         "C") {
-                                      controlh.listHotels().then((value) =>
-                                          Get.toNamed("/listHotels"));
+                                      controlh.listHotels().then(
+                                          (value) => Get.toNamed("/homePage"));
                                     } else {
                                       controlh.listHotels().then(
                                           (value) => Get.toNamed("/homeHotel"));

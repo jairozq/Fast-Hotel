@@ -6,9 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:io';
 
-class RegisterHotel extends StatelessWidget {
+class RegisterHotel extends StatefulWidget {
   const RegisterHotel({super.key});
 
+  @override
+  State<RegisterHotel> createState() => _RegisterHotelState();
+}
+
+class _RegisterHotelState extends State<RegisterHotel> {
   @override
   Widget build(BuildContext context) {
     ControlHotel controlh = Get.put(ControlHotel());
@@ -50,7 +55,8 @@ class RegisterHotel extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/fondoRH.png'), fit: BoxFit.cover),
+              image: AssetImage('assets/images/fondoRH.png'),
+              fit: BoxFit.cover),
         ),
         child: ListView.builder(
           itemCount: 1,
@@ -137,7 +143,8 @@ class RegisterHotel extends StatelessWidget {
                             OutlinedButton.icon(
                               icon: imagen64 != null
                                   ? const Icon(Icons.task_alt)
-                                  : const Icon(Icons.add_photo_alternate),
+                                  : const Icon(
+                                      Icons.add_photo_alternate_rounded),
                               label: Text(
                                 'Foto',
                                 style: TextStyle(
