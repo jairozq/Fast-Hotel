@@ -15,7 +15,7 @@ String? actualpage;
 class _ListHotelesState extends State<ListHoteles> {
   @override
   Widget build(BuildContext context) {
-    //TextEditingController search = TextEditingController();
+    TextEditingController search = TextEditingController();
 
     void onItemTapped(int index) {
       setState(() {
@@ -41,24 +41,42 @@ class _ListHotelesState extends State<ListHoteles> {
           Container(
             width: MediaQuery.of(context).size.width * 0.156,
             child: OutlinedButton.icon(
-              onPressed: () {
-                Get.toNamed("/login");
-              },
-              icon: const Icon(Icons.close_rounded, color: Colors.black),
-              label: const Text('',
-                  style: TextStyle(color: Colors.black, fontFamily: 'alkbold')),
-              style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(
-                      Color.fromARGB(255, 0, 174, 187))),
-            ),
+                onPressed: () {
+                  Get.toNamed("/login");
+                },
+                icon: const Icon(Icons.close_rounded, color: Colors.white),
+                label: const Text('',
+                    style:
+                        TextStyle(color: Colors.black, fontFamily: 'alkbold'))),
           )
         ],
       ),
       body: Column(
         children: [
           Container(
+            margin: const EdgeInsets.only(top: 5, bottom: 5),
+            decoration: BoxDecoration(border: Border.all()),
+            alignment: Alignment.center,
             width: MediaQuery.of(context).size.width * 0.8,
-            height: MediaQuery.of(context).size.height * 0.08,
+            height: MediaQuery.of(context).size.height * 0.05,
+            child: Wrap(
+              children: [
+                TextField(
+                  controller: search,
+                  decoration: InputDecoration(
+                    counterStyle: TextStyle(
+                        fontSize: MediaQuery.of(context).size.height * 0.05),
+                    suffixIcon: Icon(Icons.search_rounded),
+                    fillColor: Colors.grey.shade100,
+                    filled: true,
+                    hintText: 'Email',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           Expanded(
             child: ListView.builder(
@@ -83,12 +101,22 @@ class _ListHotelesState extends State<ListHoteles> {
                             ),
                             Row(
                               children: [
-                                Text(controlh.listarHotel![idex].nombre),
+                                Text(controlh.listarHotel![idex].nombre,
+                                    style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.045,
+                                        fontFamily: 'alkbold')),
                               ],
                             ),
                             Row(
                               children: [
-                                Text(controlh.listarHotel![idex].descripcion),
+                                Text(controlh.listarHotel![idex].descripcion,
+                                    style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.035,
+                                        fontFamily: 'alkreg')),
                               ],
                             ),
                           ],
@@ -100,84 +128,9 @@ class _ListHotelesState extends State<ListHoteles> {
               },
             ),
           ),
-          //menu inferior
-          /*Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.1,
-            decoration: BoxDecoration(border: Border.all()),
-            child: Row(
-              children: [
-                Container(
-                    width: MediaQuery.of(context).size.width * 0.2487,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: OutlinedButton.icon(
-                      style: const ButtonStyle(
-                          shape: MaterialStatePropertyAll(
-                              ContinuousRectangleBorder()),
-                          backgroundColor:
-                              MaterialStatePropertyAll(Colors.cyan)),
-                      icon: Icon(Icons.home_outlined,
-                          size: MediaQuery.of(context).size.height * 0.04,
-                          color: Colors.black),
-                      label: const Text('Home',
-                          style: TextStyle(
-                              color: Colors.black, fontFamily: 'alkreg')),
-                      onPressed: () {},
-                    )),
-                Container(
-                    width: MediaQuery.of(context).size.width * 0.2487,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: OutlinedButton.icon(
-                      style: const ButtonStyle(
-                        shape: MaterialStatePropertyAll(
-                            ContinuousRectangleBorder()),
-                      ),
-                      icon: Icon(Icons.home_outlined,
-                          size: MediaQuery.of(context).size.height * 0.04,
-                          color: Colors.black),
-                      label: const Text('Home',
-                          style: TextStyle(
-                              color: Colors.black, fontFamily: 'alkreg')),
-                      onPressed: () {},
-                    )),
-                Container(
-                    width: MediaQuery.of(context).size.width * 0.2487,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: OutlinedButton.icon(
-                      style: const ButtonStyle(
-                        shape: MaterialStatePropertyAll(
-                            ContinuousRectangleBorder()),
-                      ),
-                      icon: Icon(Icons.home_outlined,
-                          size: MediaQuery.of(context).size.height * 0.04,
-                          color: Colors.black),
-                      label: const Text('Home',
-                          style: TextStyle(
-                              color: Colors.black, fontFamily: 'alkreg')),
-                      onPressed: () {},
-                    )),
-                Container(
-                    width: MediaQuery.of(context).size.width * 0.2487,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: OutlinedButton.icon(
-                      style: const ButtonStyle(
-                        shape: MaterialStatePropertyAll(
-                            ContinuousRectangleBorder()),
-                      ),
-                      icon: Icon(Icons.home_outlined,
-                          size: MediaQuery.of(context).size.height * 0.04,
-                          color: Colors.black),
-                      label: const Text('Home',
-                          style: TextStyle(
-                              color: Colors.black, fontFamily: 'alkreg')),
-                      onPressed: () {},
-                    )),
-              ],
-            ),
-          )*/
-          //fin menu
         ],
       ),
+      //menu inferior
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.purple,
@@ -205,7 +158,7 @@ class _ListHotelesState extends State<ListHoteles> {
             label: "Perfil",
           ),
         ],
-      ),
+      ), //fin menu
     );
   }
 }
