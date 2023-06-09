@@ -263,7 +263,12 @@ class _RegisterHotelState extends State<RegisterHotel> {
                                         duration: const Duration(seconds: 3),
                                         icon: const Icon(Icons.info),
                                         shouldIconPulse: true,
-                                        backgroundColor: Colors.red);
+                                        backgroundColor: controlh
+                                                    .listaMensajes![0]
+                                                    .mensaje ==
+                                                'Usuario Almacenado'
+                                            ? Colors.green
+                                            : Colors.red);
                                   });
                                 },
                                 child: Text(

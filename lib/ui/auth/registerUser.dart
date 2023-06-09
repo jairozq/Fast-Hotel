@@ -140,7 +140,11 @@ class RegisterUser extends StatelessWidget {
                                   duration: const Duration(seconds: 3),
                                   icon: const Icon(Icons.info),
                                   shouldIconPulse: true,
-                                  backgroundColor: Colors.red);
+                                  backgroundColor:
+                                      controlu.listaMensajes![0].mensaje ==
+                                              'Usuario Almacenado'
+                                          ? Colors.green
+                                          : Colors.red);
                             });
                           },
                           child: Text(
