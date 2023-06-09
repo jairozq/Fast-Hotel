@@ -1,17 +1,25 @@
 import 'package:fasthotel/domain/controller/controllerHotel.dart';
 import 'package:fasthotel/ui/content/pageHistory.dart';
 import 'package:fasthotel/ui/content/pageHome.dart';
-import 'package:fasthotel/ui/content/routes.dart';
+import 'package:fasthotel/ui/content/pageReservation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class ListHoteles extends StatefulWidget {
-  final String dato;
-  const ListHoteles({super.key, required this.dato});
+  const ListHoteles({super.key});
 
   @override
   State<ListHoteles> createState() => _ListHotelesState();
+}
+
+cargarDatos() async {
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  print("estoy ${pref.getString("idG")}");
+  dato = pref.getString("idG");
+  print("paso a $dato");
 }
 
 String? actualpage;
@@ -50,7 +58,9 @@ class _ListHotelesState extends State<ListHoteles> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    const HomePage())));
+                                    const HomePage(
+                                      index: 0,
+                                    ))));
                   },
                 ),
                 fillColor: Colors.grey.shade100,
@@ -106,14 +116,23 @@ class _ListHotelesState extends State<ListHoteles> {
                                                 0.05,
                                         child: OutlinedButton(
                                             onPressed: () {
+                                              cargarDatos();
                                               controlh
                                                   .searchHotels(controlh
                                                       .listarHotel![idex]
                                                       .direccion)
-                                                  .then((value) => Routes(
-                                                        index: 1,
-                                                        dato: dato!,
-                                                      ));
+                                                  .then(
+                                                    (value) => Navigator
+                                                        .pushReplacement(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (BuildContext
+                                                                        context) =>
+                                                                    Reservar(
+                                                                      dato:
+                                                                          dato,
+                                                                    ))),
+                                                  );
                                             },
                                             child: Text("Resevar",
                                                 style: TextStyle(

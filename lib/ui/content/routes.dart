@@ -12,12 +12,10 @@ class Routes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> myList = [
-      ListHoteles(dato: dato),
-      Reservar(dato: dato),
+      const ListHoteles(),
       ListHistory(dato: dato),
-      Profile(
-        dato: dato,
-      )
+      Profile(dato: dato),
+      Reservar(dato: dato),
     ];
     return myList[index];
   }

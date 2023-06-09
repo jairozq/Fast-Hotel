@@ -8,13 +8,14 @@ class ControlTicket extends GetxController {
   final Rxn<List<Ticket>> _listarTickets = Rxn<List<Ticket>>([]);
 
   Future<void> crearTicket(
-      String habtacion,
-      String idUser,
-      String nombreHotel,
-      String idHotel,
-      String detalle,
-      String fechaInicio,
-      String fechaFinal) async {
+    String idUser,
+    String nombreHotel,
+    String idHotel,
+    String detalle,
+    String fechaInicio,
+    String fechaFinal,
+    String habtacion,
+  ) async {
     _listarMensajes.value = await PeticionesTicket.registrarTicket(habtacion,
         idUser, nombreHotel, idHotel, detalle, fechaInicio, fechaFinal);
   }
@@ -23,7 +24,7 @@ class ControlTicket extends GetxController {
     _listarTickets.value = await PeticionesTicket.listarTicketsVig(user);
   }
 
-  Future<void> listTicketVen(String user) async {
+  Future<void> listTicketsVen(String user) async {
     _listarTickets.value = await PeticionesTicket.listarTiketsVen(user);
   }
 
