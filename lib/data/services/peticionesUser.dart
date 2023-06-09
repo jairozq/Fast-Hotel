@@ -5,10 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class PeticionesUser {
-  static Future<List<Mensajes>> registrarUser(String nombre, String cedula, String celular) async {
-    var url = Uri.parse(
-        "https://fatshotel.000webhostapp.com/agregarUser.php");
-    final response = await http.post(url, body: {'nombre': nombre, 'cedula': cedula, 'celular': celular});
+  static Future<List<Mensajes>> registrarUser(
+      String nombre, String cedula, String celular) async {
+    var url = Uri.parse("https://fatshotel.000webhostapp.com/agregarUser.php");
+    final response = await http.post(url,
+        body: {'nombre': nombre, 'cedula': cedula, 'celular': celular});
 
     return compute(convertirAlista, response.body);
   }
@@ -24,19 +25,16 @@ class PeticionesUser {
     return compute(convertirAlista2, response.body);
   }
 
-
   static List<User> convertirAlista2(String responsebody) {
-    final pasar = json.decode(responsebody).cast<Map<String, dynamic>>(); 
+    final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
     return pasar.map<User>((json) => User.desdeJson(json)).toList();
   }
 
-  static Future<List<User>> obtenerId(String user) async {
-    var url = Uri.parse("https://fatshotel.000webhostapp.com/extraerIdU.php");
+  static Future<List<User>> buscarUser(String id) async {
+    var url = Uri.parse("https://fatshotel.000webhostapp.com/buscarUser.php");
 
-    final response = await http.post(url, body: {'user': user});
+    final response = await http.post(url, body: {'iduser': id});
 
     return compute(convertirAlista2, response.body);
   }
 }
-
-//controlh.listHotels().then((value) => null);

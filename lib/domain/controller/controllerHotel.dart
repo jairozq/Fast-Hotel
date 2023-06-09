@@ -25,8 +25,11 @@ class ControlHotel extends GetxController {
   }
 
   Future<void> filterHotels(String nombre) async {
-    print("resibí: $nombre");
     _listarHotel.value = await PeticionesHotel.filtrarHoteles(nombre);
+  }
+
+  Future<void> searchHotels(String idhotel) async {
+    _listarHotel.value = await PeticionesHotel.buscarHoteles(idhotel);
   }
 
   List<Mensajes>? get listaMensajes => _listarMensajes.value;

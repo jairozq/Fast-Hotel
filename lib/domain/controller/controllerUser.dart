@@ -10,13 +10,20 @@ class ControlUser extends GetxController {
   final Rxn<List<User>> _listarUser = Rxn<List<User>>([]);
   final Rxn<List<Access>> _listarAccess = Rxn<List<Access>>([]);
 
-  Future<void> crearUser(String nombre, String cedula, String celular, String user, String pass) async {
-    _listarMensajes.value = await PeticionesUser.registrarUser(nombre, cedula, celular);
-    _listarMensajes.value = await PeticionesAccess.registrarAccessUser(cedula, user, pass);
+  Future<void> crearUser(String nombre, String cedula, String celular,
+      String user, String pass) async {
+    _listarMensajes.value =
+        await PeticionesUser.registrarUser(nombre, cedula, celular);
+    _listarMensajes.value =
+        await PeticionesAccess.registrarAccessUser(cedula, user, pass);
   }
 
   Future<void> validarUser(String u, String p) async {
     _listarAccess.value = await PeticionesAccess.validarAccess(u, p);
+  }
+
+  Future<void> buscarUser(String id) async {
+    _listarUser.value = await PeticionesUser.buscarUser(id);
   }
 
   List<Mensajes>? get listaMensajes => _listarMensajes.value;

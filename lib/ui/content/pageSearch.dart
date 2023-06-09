@@ -1,12 +1,14 @@
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fasthotel/domain/controller/controllerHotel.dart';
+import 'package:fasthotel/ui/content/pageHistory.dart';
 import 'package:fasthotel/ui/content/pageHome.dart';
+import 'package:fasthotel/ui/content/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 
 class ListHoteles extends StatefulWidget {
-  const ListHoteles({super.key});
+  final String dato;
+  const ListHoteles({super.key, required this.dato});
 
   @override
   State<ListHoteles> createState() => _ListHotelesState();
@@ -17,21 +19,6 @@ String? actualpage;
 class _ListHotelesState extends State<ListHoteles> {
   @override
   Widget build(BuildContext context) {
-    String? dato;
-
-    @override
-    _cargarDatos() async {
-      SharedPreferences pref = await SharedPreferences.getInstance();
-      setState(() {
-        dato = pref.getString("idG");
-      });
-    }
-
-    void initState() {
-      super.initState();
-      _cargarDatos();
-    }
-
     ControlHotel controlh = Get.put(ControlHotel());
     TextEditingController search = TextEditingController();
 
@@ -79,7 +66,7 @@ class _ListHotelesState extends State<ListHoteles> {
               ? Container(
                   alignment: Alignment.center,
                   child: Text(
-                    "No hay resultados $dato",
+                    "No hay resultados",
                     style: TextStyle(
                         color: Colors.grey,
                         fontFamily: "alkreg",
@@ -92,7 +79,7 @@ class _ListHotelesState extends State<ListHoteles> {
                       return Container(
                         alignment: AlignmentDirectional.center,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * 0.3,
+                        height: MediaQuery.of(context).size.height * 0.4,
                         child: Column(
                           children: [
                             Card(
@@ -106,6 +93,38 @@ class _ListHotelesState extends State<ListHoteles> {
                                         0.2,
                                     child: Image.memory(decodeimage(
                                         controlh.listarHotel![idex].imagen)),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.3,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.05,
+                                        child: OutlinedButton(
+                                            onPressed: () {
+                                              controlh
+                                                  .searchHotels(controlh
+                                                      .listarHotel![idex]
+                                                      .direccion)
+                                                  .then((value) => Routes(
+                                                        index: 1,
+                                                        dato: dato!,
+                                                      ));
+                                            },
+                                            child: Text("Resevar",
+                                                style: TextStyle(
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.05,
+                                                    fontFamily: 'alkbold'))),
+                                      ),
+                                    ],
                                   ),
                                   Row(
                                     children: [

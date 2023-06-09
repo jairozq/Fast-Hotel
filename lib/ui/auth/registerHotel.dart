@@ -175,7 +175,7 @@ class _RegisterHotelState extends State<RegisterHotel> {
                                                                 .size
                                                                 .height *
                                                             0.1,
-                                                    child: Row(children: const [
+                                                    child: const Row(children: [
                                                       Expanded(
                                                           child: Text('Camara',
                                                               style: TextStyle(
@@ -199,7 +199,7 @@ class _RegisterHotelState extends State<RegisterHotel> {
                                                                 .size
                                                                 .height *
                                                             0.1,
-                                                    child: Row(children: const [
+                                                    child: const Row(children: [
                                                       Expanded(
                                                           child: Text('Galeria',
                                                               style: TextStyle(

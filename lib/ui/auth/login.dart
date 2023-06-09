@@ -14,7 +14,10 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   void guardaId(String iduser) async {
     SharedPreferences dato = await SharedPreferences.getInstance();
-    dato.setString("idG", iduser);
+    setState(() {
+      dato.setString("idG", iduser);
+      print("${dato.getString("idG")}");
+    });
   }
 
   @override
@@ -37,7 +40,6 @@ class _LoginState extends State<Login> {
             itemCount: 1,
             itemBuilder: (BuildContext context, int index) {
               return SingleChildScrollView(
-                //reverse: true,
                 child: Column(
                   children: [
                     Container(

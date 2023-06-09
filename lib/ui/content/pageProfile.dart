@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 //import 'package:get/get.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({super.key});
+  final String dato;
+  const Profile({super.key, required this.dato});
 
   @override
   State<Profile> createState() => _ProfileState();

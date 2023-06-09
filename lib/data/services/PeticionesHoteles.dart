@@ -47,10 +47,9 @@ class PeticionesHotel {
     return compute(convertirAlista2, response.body);
   }
 
-  static Future<List<Hotel>> obtenerId(String user) async {
-    var url = Uri.parse("https://fatshotel.000webhostapp.com/extraerIdH.php");
-
-    final response = await http.post(url, body: {'user': user});
+  static Future<List<Hotel>> buscarHoteles(String idhotel) async {
+    var url = Uri.parse("https://fatshotel.000webhostapp.com/buscarHotel.php");
+    final response = await http.post(url, body: {'idhotel': idhotel});
 
     return compute(convertirAlista2, response.body);
   }
