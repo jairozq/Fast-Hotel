@@ -187,6 +187,7 @@ class _ReservarState extends State<Reservar> {
                 Container(
                   child: FilledButton(
                       onPressed: () {
+                        print("$fechaInicio y $fechaFinal");
                         controlt
                             .crearTicket(
                               idUser.text,
