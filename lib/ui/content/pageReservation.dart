@@ -119,7 +119,8 @@ class _ReservarState extends State<Reservar> {
                                 lastDate: DateTime(3000));
                             if (dateTime != null) {
                               setState(() {
-                                fechaInicio = dateTime.toString();
+                                fechaInicio =
+                                    (dateTime.toString()).split(" ")[0];
                               });
                             }
                           },
@@ -150,7 +151,8 @@ class _ReservarState extends State<Reservar> {
                                 lastDate: DateTime(3000));
                             if (dateTime != null) {
                               setState(() {
-                                fechaFinal = dateTime.toString();
+                                fechaFinal =
+                                    (dateTime.toString()).split(" ")[0];
                               });
                             }
                           },
@@ -190,15 +192,29 @@ class _ReservarState extends State<Reservar> {
                         print("$fechaInicio y $fechaFinal");
                         controlt
                             .crearTicket(
-                              idUser.text,
-                              nombreHotel.text,
-                              idHotel.text,
-                              detalle.text,
-                              fechaInicio.toString(),
-                              fechaFinal.toString(),
-                              habitacion.text,
-                            )
-                            .then((value) => Get.toNamed("/homeHotel"));
+                          dato!,
+                          controlh.listarHotel![0].nombre,
+                          controlh.listarHotel![0].direccion,
+                          detalle.text,
+                          fechaInicio.toString(),
+                          fechaFinal.toString(),
+                          habitacion.text,
+                        )
+                            .then((value) {
+                          Get.snackbar(
+                              'Clientes', controlt.listaMensajes![0].mensaje,
+                              duration: const Duration(seconds: 3),
+                              icon: const Icon(Icons.info),
+                              shouldIconPulse: true,
+                              backgroundColor:
+                                  controlt.listaMensajes![0].mensaje ==
+                                          'Ticket Registrado'
+                                      ? Colors.green
+                                      : Colors.red);
+                        });
+                        controlh
+                            .listHotels()
+                            .then((value) => Get.toNamed("/homePage"));
                       },
                       child: Text(
                         "     Registrar     ",

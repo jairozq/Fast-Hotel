@@ -108,6 +108,11 @@ class _ListHotelesState extends State<ListHoteles> {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Container(
+                                        margin: EdgeInsets.only(
+                                            top: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.01),
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 0.3,

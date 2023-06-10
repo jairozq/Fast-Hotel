@@ -81,6 +81,79 @@ class _ListHistoryState extends State<ListHistory> {
             ),
           ]),
         ),
+        controlt.listarTickets!.isEmpty
+            ? Container(
+                alignment: Alignment.center,
+                child: Text(
+                  "No hay reservaciones en el registro",
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontFamily: "alkreg",
+                      fontSize: MediaQuery.of(context).size.width * 0.06),
+                ),
+              )
+            : Expanded(
+                child: ListView.builder(
+                  itemCount: controlt.listarTickets!.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      alignment: AlignmentDirectional.center,
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      child: Column(
+                        children: [
+                          Card(
+                            child: Column(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5)),
+                                  width: MediaQuery.of(context).size.width,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.2,
+                                  child: Text(
+                                      controlt
+                                          .listarTickets![index].nombreHotel,
+                                      style:
+                                          TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.045,
+                                              fontFamily: 'alkbold')),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(controlt.listarTickets![index].idHotel,
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.045,
+                                            fontFamily: 'alkbold')),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                        "${controlt.listarTickets![index].fechaInicio}",
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.035,
+                                            fontFamily: 'alkreg')),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              )
       ]),
     );
   }

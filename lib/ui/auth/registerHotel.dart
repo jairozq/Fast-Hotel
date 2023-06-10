@@ -270,6 +270,9 @@ class _RegisterHotelState extends State<RegisterHotel> {
                                             ? Colors.green
                                             : Colors.red);
                                   });
+                                  controlh
+                                      .listHotels()
+                                      .then((value) => Get.toNamed("/login"));
                                 },
                                 child: Text(
                                   '     Registrar     ',

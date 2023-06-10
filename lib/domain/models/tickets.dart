@@ -5,9 +5,9 @@ class Ticket {
   late String nombreHotel;
   late String idHotel;
   late String detalle;
-  late DateTime fechaInicio;
-  late DateTime fechaFinal;
-  late DateTime estado;
+  late String fechaInicio;
+  late String fechaFinal;
+  late String estado;
 
   Ticket(
       {required this.ticketId,

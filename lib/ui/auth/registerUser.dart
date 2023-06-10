@@ -146,6 +146,7 @@ class RegisterUser extends StatelessWidget {
                                           ? Colors.green
                                           : Colors.red);
                             });
+                            ((value) => Get.toNamed("/login"));
                           },
                           child: Text(
                             '     Registrar     ',

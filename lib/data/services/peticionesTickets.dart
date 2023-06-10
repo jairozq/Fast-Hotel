@@ -16,15 +16,16 @@ class PeticionesTicket {
     var url =
         Uri.parse("https://fatshotel.000webhostapp.com/agregarTicket.php");
     final response = await http.post(url, body: {
-      'habtacion': habtacion,
-      'idUser': idUser,
-      'nombreHotel': nombreHotel,
-      'idHotel': idHotel,
+      'habitacion': habtacion,
+      'iduser': idUser,
+      'nombrehotel': nombreHotel,
+      'idhotel': idHotel,
       'detalle': detalle,
-      'fechaInicio': fechaInicio,
-      'fechaFinal': fechaFinal,
+      'fechainicio': fechaInicio,
+      'fechafinal': fechaFinal,
       'estado': 'Vigente',
     });
+
     return compute(convertirAlista, response.body);
   }
 
@@ -38,6 +39,8 @@ class PeticionesTicket {
         Uri.parse("https://fatshotel.000webhostapp.com/listarTicketsVig.php");
     final response = await http.post(url, body: {'user': user});
 
+    print(response.statusCode);
+    print(response.body);
     return compute(convertirAlista2, response.body);
   }
 
@@ -46,6 +49,8 @@ class PeticionesTicket {
         Uri.parse("https://fatshotel.000webhostapp.com/listarTicketsVen.php");
     final response = await http.post(url, body: {'user': user});
 
+    print(response.statusCode);
+    print(response.body);
     return compute(convertirAlista2, response.body);
   }
 

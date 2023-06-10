@@ -19,9 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   cargarDatos() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    print("estoy ${pref.getString("idG")}");
     dato = pref.getString("idG");
-    print("paso a $dato");
   }
 
   @override
