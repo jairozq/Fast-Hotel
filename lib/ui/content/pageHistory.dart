@@ -28,6 +28,7 @@ class _ListHistoryState extends State<ListHistory> {
   @override
   Widget build(BuildContext context) {
     ControlTicket controlt = Get.put(ControlTicket());
+    print(controlt.listarTickets!.length);
     //ControlHotel controlh = Get.put(ControlHotel());
     if (idex == 0) {
       cargarVista();
@@ -173,6 +174,18 @@ class _ListHistoryState extends State<ListHistory> {
                                                                 'Ticket Cancelado'
                                                             ? Colors.green
                                                             : Colors.red);
+                                                  });
+                                                  controlt
+                                                      .listTicketsVig(
+                                                          dato.toString())
+                                                      .then((value) {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (BuildContext
+                                                                  context) =>
+                                                              const HomePage(),
+                                                        ));
                                                   });
                                                 },
                                                 child: Text("Cancelar",

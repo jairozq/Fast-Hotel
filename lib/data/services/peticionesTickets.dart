@@ -31,7 +31,7 @@ class PeticionesTicket {
 
   static Future<List<Mensajes>> cancelarTicket(String ticketId) async {
     var url =
-        Uri.parse("https://fatshotel.000webhostapp.com/canclarTicket.php");
+        Uri.parse("https://fatshotel.000webhostapp.com/cancelarTicket.php");
     final response = await http.post(url, body: {'ticketId': ticketId});
 
     return compute(convertirAlista, response.body);
