@@ -1,7 +1,7 @@
-import 'package:fasthotel/ui/auth/login.dart';
+import 'package:fasthotel/ui/content/client/pageHome.dart';
 import 'package:fasthotel/ui/auth/registerHotel.dart';
 import 'package:fasthotel/ui/auth/registerUser.dart';
-import 'package:fasthotel/ui/content/pageHome.dart';
+import 'package:fasthotel/ui/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,7 +1,7 @@
-import 'package:fasthotel/ui/content/pageProfile.dart';
-import 'package:fasthotel/ui/content/pageReservation.dart';
-import 'package:fasthotel/ui/content/pageSearch.dart';
-import 'package:fasthotel/ui/content/pageHistory.dart';
+import 'package:fasthotel/ui/content/client/pageReservation.dart';
+import 'package:fasthotel/ui/content/client/pageHistory.dart';
+import 'package:fasthotel/ui/content/client/pageProfile.dart';
+import 'package:fasthotel/ui/content/client/pageSearch.dart';
 import 'package:flutter/material.dart';
 
 class Routes extends StatelessWidget {

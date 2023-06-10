@@ -1,9 +1,9 @@
-import 'package:fasthotel/ui/content/bottom_nav.dart';
-import 'package:fasthotel/ui/content/pageHistory.dart';
-import 'package:fasthotel/ui/content/routes.dart';
+import 'package:fasthotel/ui/content/client/bottom_nav.dart';
+import 'package:fasthotel/ui/content/client/pageHistory.dart';
+import 'package:fasthotel/ui/content/client/routes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
