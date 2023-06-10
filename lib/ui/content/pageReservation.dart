@@ -1,12 +1,11 @@
 import 'package:fasthotel/domain/controller/controllerHotel.dart';
 import 'package:fasthotel/domain/controller/controllerTickets.dart';
-import 'package:fasthotel/ui/content/pageHistory.dart';
+import 'package:fasthotel/ui/content/pageHome.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Reservar extends StatefulWidget {
-  final String? dato;
-  const Reservar({super.key, required this.dato});
+  const Reservar({super.key});
 
   @override
   State<Reservar> createState() => _ReservarState();
@@ -189,10 +188,9 @@ class _ReservarState extends State<Reservar> {
                 Container(
                   child: FilledButton(
                       onPressed: () {
-                        print("$fechaInicio y $fechaFinal");
                         controlt
                             .crearTicket(
-                          dato!,
+                          dato,
                           controlh.listarHotel![0].nombre,
                           controlh.listarHotel![0].direccion,
                           detalle.text,

@@ -22,6 +22,7 @@ class PeticionesUser {
   static Future<List<User>> validarUser(String u, String p) async {
     var url = Uri.parse("https://fatshotel.000webhostapp.com/validarUser.php");
     final response = await http.post(url, body: {'user': u, 'pass': p});
+
     return compute(convertirAlista2, response.body);
   }
 
@@ -32,7 +33,6 @@ class PeticionesUser {
 
   static Future<List<User>> buscarUser(String id) async {
     var url = Uri.parse("https://fatshotel.000webhostapp.com/buscarUser.php");
-
     final response = await http.post(url, body: {'iduser': id});
 
     return compute(convertirAlista2, response.body);

@@ -1,33 +1,45 @@
+import 'package:fasthotel/domain/controller/controllerHotel.dart';
 import 'package:fasthotel/domain/controller/controllerTickets.dart';
 import 'package:fasthotel/ui/content/pageHome.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-//import 'package:http/http.dart';
 
 class ListHistory extends StatefulWidget {
-  final String dato;
-  const ListHistory({super.key, required this.dato});
+  const ListHistory({
+    super.key,
+  });
 
   @override
   State<ListHistory> createState() => _ListHistoryState();
 }
 
-String? dato;
+int idex = 0;
 
 class _ListHistoryState extends State<ListHistory> {
   ControlTicket controlt = Get.put(ControlTicket());
+  ControlHotel controlh = Get.put(ControlHotel());
 
-  cargarDatos() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    print("estoy ${pref.getString("idG")}");
-    dato = pref.getString("idG");
-    print("paso a $dato");
+  cargarVista() {
+    setState(() {
+      idex = 1;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     ControlTicket controlt = Get.put(ControlTicket());
+    //ControlHotel controlh = Get.put(ControlHotel());
+    if (idex == 0) {
+      cargarVista();
+      //controlh.listarHotel(controlt.listarTickets
+      controlt.listTicketsVig(dato.toString()).then((value) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => const HomePage(),
+            ));
+      });
+    }
 
     return Scaffold(
       body: Column(children: [
@@ -40,14 +52,11 @@ class _ListHistoryState extends State<ListHistory> {
               width: MediaQuery.of(context).size.width * 0.5,
               child: OutlinedButton(
                   onPressed: () {
-                    cargarDatos();
                     controlt.listTicketsVig(dato.toString()).then((value) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (BuildContext context) => const HomePage(
-                              index: 1,
-                            ),
+                            builder: (BuildContext context) => const HomePage(),
                           ));
                     });
                   },
@@ -62,14 +71,11 @@ class _ListHistoryState extends State<ListHistory> {
               width: MediaQuery.of(context).size.width * 0.5,
               child: OutlinedButton(
                   onPressed: () {
-                    cargarDatos();
                     controlt.listTicketsVen(dato.toString()).then((value) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (BuildContext context) => const HomePage(
-                              index: 1,
-                            ),
+                            builder: (BuildContext context) => const HomePage(),
                           ));
                     });
                   },
@@ -99,52 +105,112 @@ class _ListHistoryState extends State<ListHistory> {
                     return Container(
                       alignment: AlignmentDirectional.center,
                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height * 0.4,
+                      height: MediaQuery.of(context).size.height * 0.15,
                       child: Column(
                         children: [
                           Card(
                             child: Column(
                               children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5)),
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.2,
-                                  child: Text(
-                                      controlt
-                                          .listarTickets![index].nombreHotel,
-                                      style:
-                                          TextStyle(
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.75,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.03,
+                                      child: Text(
+                                          controlt.listarTickets![index]
+                                              .nombreHotel,
+                                          style: TextStyle(
+                                              color: controlt
+                                                          .listarTickets![index]
+                                                          .estado ==
+                                                      'Vigente'
+                                                  ? Colors.black
+                                                  : Colors.red,
                                               fontSize: MediaQuery.of(context)
                                                       .size
                                                       .width *
                                                   0.045,
                                               fontFamily: 'alkbold')),
-                                ),
-                                Row(
-                                  children: [
-                                    Text(controlt.listarTickets![index].idHotel,
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.045,
-                                            fontFamily: 'alkbold')),
+                                    ),
+                                    Container(
+                                      child: TextButton(
+                                          onPressed: () {
+                                            controlt
+                                                .cancelarTickets(controlt
+                                                    .listarTickets![index]
+                                                    .ticketId
+                                                    .toString())
+                                                .then((value) {
+                                              Get.snackbar(
+                                                  "Ticket",
+                                                  controlt.listaMensajes![0]
+                                                      .mensaje,
+                                                  duration: const Duration(
+                                                      seconds: 3),
+                                                  icon: const Icon(Icons.info),
+                                                  shouldIconPulse: true,
+                                                  backgroundColor: controlt
+                                                              .listaMensajes![0]
+                                                              .mensaje ==
+                                                          'Ticket Cancelado'
+                                                      ? Colors.green
+                                                      : Colors.red);
+                                            });
+                                          },
+                                          child: Text("Cancelar",
+                                              style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.035,
+                                                  fontFamily: 'alkbold'))),
+                                    )
                                   ],
                                 ),
                                 Row(
                                   children: [
-                                    Text(
-                                        "${controlt.listarTickets![index].fechaInicio}",
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.035,
-                                            fontFamily: 'alkreg')),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.7,
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                  controlt.listarTickets![index]
+                                                      .idHotel,
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.035,
+                                                      fontFamily: 'alkbold')),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                  "${controlt.listarTickets![index].fechaInicio}",
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.035,
+                                                      fontFamily: 'alkreg')),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    )
                                   ],
-                                ),
+                                )
                               ],
                             ),
                           ),

@@ -29,6 +29,14 @@ class PeticionesTicket {
     return compute(convertirAlista, response.body);
   }
 
+  static Future<List<Mensajes>> cancelarTicket(String ticketId) async {
+    var url =
+        Uri.parse("https://fatshotel.000webhostapp.com/canclarTicket.php");
+    final response = await http.post(url, body: {'ticketId': ticketId});
+
+    return compute(convertirAlista, response.body);
+  }
+
   static List<Mensajes> convertirAlista(String responsebody) {
     final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
     return pasar.map<Mensajes>((json) => Mensajes.desdeJson(json)).toList();
@@ -39,8 +47,6 @@ class PeticionesTicket {
         Uri.parse("https://fatshotel.000webhostapp.com/listarTicketsVig.php");
     final response = await http.post(url, body: {'user': user});
 
-    print(response.statusCode);
-    print(response.body);
     return compute(convertirAlista2, response.body);
   }
 
@@ -48,15 +54,6 @@ class PeticionesTicket {
     var url =
         Uri.parse("https://fatshotel.000webhostapp.com/listarTicketsVen.php");
     final response = await http.post(url, body: {'user': user});
-
-    print(response.statusCode);
-    print(response.body);
-    return compute(convertirAlista2, response.body);
-  }
-
-  static Future<List<Ticket>> filtrarHoteles(String nombre) async {
-    var url = Uri.parse("https://fatshotel.000webhostapp.com/filtrarHotel.php");
-    final response = await http.post(url, body: {'nombre': nombre});
 
     return compute(convertirAlista2, response.body);
   }

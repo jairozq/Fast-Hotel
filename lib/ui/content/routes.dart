@@ -6,16 +6,15 @@ import 'package:flutter/material.dart';
 
 class Routes extends StatelessWidget {
   final int index;
-  final String dato;
-  const Routes({super.key, required this.index, required this.dato});
+  const Routes({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
     List<Widget> myList = [
       const ListHoteles(),
-      ListHistory(dato: dato),
-      Profile(dato: dato),
-      Reservar(dato: dato),
+      const ListHistory(),
+      const Profile(),
+      const Reservar(),
     ];
     return myList[index];
   }

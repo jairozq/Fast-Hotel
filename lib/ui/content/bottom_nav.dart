@@ -1,3 +1,4 @@
+import 'package:fasthotel/ui/content/pageHistory.dart';
 import 'package:flutter/material.dart';
 
 class Bnavigator extends StatefulWidget {
@@ -9,7 +10,7 @@ class Bnavigator extends StatefulWidget {
 }
 
 class _Bnavigator extends State<Bnavigator> {
-  int actualpage = 0;
+  int actualpage = idex;
 
   @override
   Widget build(BuildContext context) {

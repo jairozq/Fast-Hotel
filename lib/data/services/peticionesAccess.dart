@@ -4,20 +4,31 @@ import 'package:fasthotel/domain/models/utiles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-class PeticionesAccess{
-  static Future<List<Mensajes>> registrarAccessUser(String cedula, String user, String pass) async {
-    var url = Uri.parse("https://fatshotel.000webhostapp.com/agregarAccess.php");
-    final response = await http.post(url, body: {'iduser': cedula, 'user': user, 'password': pass, 'tipocuenta': 'C'});
+class PeticionesAccess {
+  static Future<List<Mensajes>> registrarAccessUser(
+      String cedula, String user, String pass) async {
+    var url =
+        Uri.parse("https://fatshotel.000webhostapp.com/agregarAccess.php");
+    final response = await http.post(url, body: {
+      'iduser': cedula,
+      'user': user,
+      'password': pass,
+      'tipocuenta': 'C'
+    });
     return compute(convertirAlista, response.body);
   }
 
-  static Future<List<Mensajes>> registrarAccessHotel(String direccion, String user, String pass) async {
-    var url = Uri.parse("https://fatshotel.000webhostapp.com/agregarAccess.php");
-    final response = await http.post(url, body: {'iduser': direccion, 'user': user, 'password': pass, 'tipocuenta': 'H'});
-    print('Ya llegue a access y tengo:');
-    print('$direccion  $user  $pass');
-    print(response.statusCode);
-    print(response.body);
+  static Future<List<Mensajes>> registrarAccessHotel(
+      String direccion, String user, String pass) async {
+    var url =
+        Uri.parse("https://fatshotel.000webhostapp.com/agregarAccess.php");
+    final response = await http.post(url, body: {
+      'iduser': direccion,
+      'user': user,
+      'password': pass,
+      'tipocuenta': 'H'
+    });
+
     return compute(convertirAlista, response.body);
   }
 
@@ -27,16 +38,16 @@ class PeticionesAccess{
   }
 
   static Future<List<Access>> validarAccess(String user, String pass) async {
-    var url = Uri.parse("https://fatshotel.000webhostapp.com/validarAccess.php");
+    var url =
+        Uri.parse("https://fatshotel.000webhostapp.com/validarAccess.php");
     final response = await http.post(url, body: {'user': user, 'pass': pass});
-    print(response.statusCode);
-    print('yo soy el boody: ${response.body}');
-    return compute(convertirAlista2,response.body);
+
+    return compute(convertirAlista2, response.body);
   }
 
   static List<Access> convertirAlista2(String responsebody) {
     print('aca');
-    final pasar = json.decode(responsebody).cast<Map<String, dynamic>>(); 
+    final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
     return pasar.map<Access>((json) => Access.desdeJson(json)).toList();
   }
 }

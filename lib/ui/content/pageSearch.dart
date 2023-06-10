@@ -1,5 +1,4 @@
 import 'package:fasthotel/domain/controller/controllerHotel.dart';
-import 'package:fasthotel/ui/content/pageHistory.dart';
 import 'package:fasthotel/ui/content/pageHome.dart';
 import 'package:fasthotel/ui/content/pageReservation.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,7 @@ class ListHoteles extends StatefulWidget {
 cargarDatos() async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   print("estoy ${pref.getString("idG")}");
-  dato = pref.getString("idG");
+  dato = pref.getString("idG").toString();
   print("paso a $dato");
 }
 
@@ -58,9 +57,7 @@ class _ListHotelesState extends State<ListHoteles> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    const HomePage(
-                                      index: 0,
-                                    ))));
+                                    const HomePage())));
                   },
                 ),
                 fillColor: Colors.grey.shade100,
@@ -97,12 +94,33 @@ class _ListHotelesState extends State<ListHoteles> {
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5)),
+                                        image: DecorationImage(
+                                            opacity: 70,
+                                            fit: BoxFit.cover,
+                                            image: MemoryImage(decodeimage(
+                                                controlh.listarHotel![idex]
+                                                    .imagen)))),
                                     width: MediaQuery.of(context).size.width,
                                     height: MediaQuery.of(context).size.height *
-                                        0.2,
-                                    child: Image.memory(decodeimage(
-                                        controlh.listarHotel![idex].imagen)),
+                                        0.25,
+                                    child: CircleAvatar(
+                                      child: ClipOval(
+                                        child: Image.memory(
+                                          decodeimage(controlh
+                                              .listarHotel![idex].imagen),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.3,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.25,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      radius: 50,
+                                    ),
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
@@ -133,10 +151,7 @@ class _ListHotelesState extends State<ListHoteles> {
                                                             MaterialPageRoute(
                                                                 builder: (BuildContext
                                                                         context) =>
-                                                                    Reservar(
-                                                                      dato:
-                                                                          dato,
-                                                                    ))),
+                                                                    Reservar())),
                                                   );
                                             },
                                             child: Text("Resevar",

@@ -1,25 +1,28 @@
 import 'package:fasthotel/ui/content/bottom_nav.dart';
+import 'package:fasthotel/ui/content/pageHistory.dart';
 import 'package:fasthotel/ui/content/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
-  final int index;
-  const HomePage({super.key, required this.index});
+  const HomePage({
+    super.key,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
+String dato = '';
+
 class _HomePageState extends State<HomePage> {
-  String? dato = '';
-  int index = 0;
+  int index = idex;
   Bnavigator? myBNB;
 
   cargarDatos() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    dato = pref.getString("idG");
+    dato = pref.getString("idG").toString();
   }
 
   @override
@@ -39,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: myBNB,
-      body: Routes(index: index, dato: dato!),
+      body: Routes(index: index),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,

@@ -20,6 +20,10 @@ class ControlTicket extends GetxController {
         idUser, nombreHotel, idHotel, detalle, fechaInicio, fechaFinal);
   }
 
+  Future<void> cancelarTickets(String ticketId) async {
+    _listarMensajes.value = await PeticionesTicket.cancelarTicket(ticketId);
+  }
+
   Future<void> listTicketsVig(String user) async {
     _listarTickets.value = await PeticionesTicket.listarTicketsVig(user);
   }
