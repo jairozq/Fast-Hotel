@@ -58,9 +58,9 @@ class PeticionesTicket {
     return compute(convertirAlista2, response.body);
   }
 
-  static Future<List<Ticket>> consultarTicket(String ticketId) async {
-    var url = Uri.parse("https://fatshotel.000webhostapp.com/extraerIdH.php");
-    final response = await http.post(url, body: {'ticketId': ticketId});
+  static Future<List<Ticket>> filtrarTickets(String user) async {
+    var url = Uri.parse("https://fatshotel.000webhostapp.com/buscarTicket.php");
+    final response = await http.post(url, body: {'user': user});
 
     return compute(convertirAlista2, response.body);
   }

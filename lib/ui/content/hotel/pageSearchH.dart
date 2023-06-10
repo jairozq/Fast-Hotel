@@ -1,11 +1,9 @@
-import 'package:fasthotel/domain/controller/controllerHotel.dart';
-import 'package:fasthotel/ui/content/hotel/pageReservationH.dart';
+import 'package:fasthotel/domain/controller/controllerTickets.dart';
 import 'package:fasthotel/ui/content/hotel/pageHistoryH.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:convert';
 
 class ListHoteles extends StatefulWidget {
   const ListHoteles({super.key});
@@ -18,9 +16,7 @@ class ListHoteles extends StatefulWidget {
 
 cargarDatos() async {
   SharedPreferences pref = await SharedPreferences.getInstance();
-  print("estoy ${pref.getString("idG")}");
   dato = pref.getString("idG").toString();
-  print("paso a $dato");
 }
 
 String? actualpage;
@@ -28,14 +24,8 @@ String? actualpage;
 class _ListHotelesState extends State<ListHoteles> {
   @override
   Widget build(BuildContext context) {
-    ControlHotel controlh = Get.put(ControlHotel());
+    ControlTicket controlt = Get.put(ControlTicket());
     TextEditingController search = TextEditingController();
-
-    decodeimage(imagen) {
-      var imagen64 = (imagen).split(",")[1];
-      var foto = base64Decode(imagen64);
-      return foto;
-    }
 
     modificarIdex() {
       setState(() {
@@ -43,6 +33,7 @@ class _ListHotelesState extends State<ListHoteles> {
       });
     }
 
+    //print(controlt.listarHotel!);
     return Scaffold(
       body: Column(
         children: [
@@ -61,7 +52,7 @@ class _ListHotelesState extends State<ListHoteles> {
                   icon: const Icon(Icons.search_rounded),
                   onPressed: () {
                     modificarIdex();
-                    controlh.filterHotels(search.text).then((value) =>
+                    controlt.filtrarTickets(search.text).then((value) =>
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -78,7 +69,7 @@ class _ListHotelesState extends State<ListHoteles> {
               ),
             ),
           ),
-          controlh.listarHotel!.isEmpty
+          controlt.listarTickets!.isEmpty
               ? Container(
                   alignment: Alignment.center,
                   child: Text(
@@ -90,7 +81,7 @@ class _ListHotelesState extends State<ListHoteles> {
                   ))
               : Expanded(
                   child: ListView.builder(
-                    itemCount: controlh.listarHotel!.length,
+                    itemCount: controlt.listarTickets!.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         alignment: AlignmentDirectional.center,
@@ -102,34 +93,10 @@ class _ListHotelesState extends State<ListHoteles> {
                               child: Column(
                                 children: [
                                   Container(
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            opacity: 70,
-                                            fit: BoxFit.cover,
-                                            image: MemoryImage(decodeimage(
-                                                controlh.listarHotel![index]
-                                                    .imagen)))),
                                     width: MediaQuery.of(context).size.width,
                                     height: MediaQuery.of(context).size.height *
                                         0.25,
-                                    child: CircleAvatar(
-                                      child: ClipOval(
-                                        child: Image.memory(
-                                          decodeimage(controlh
-                                              .listarHotel![index].imagen),
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.3,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.25,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      radius: 50,
-                                    ),
+                                    child: Text(""),
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
@@ -146,37 +113,13 @@ class _ListHotelesState extends State<ListHoteles> {
                                         height:
                                             MediaQuery.of(context).size.height *
                                                 0.05,
-                                        child: OutlinedButton(
-                                            onPressed: () {
-                                              cargarDatos();
-                                              controlh
-                                                  .searchHotels(controlh
-                                                      .listarHotel![index]
-                                                      .direccion)
-                                                  .then(
-                                                    (value) => Navigator
-                                                        .pushReplacement(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (BuildContext
-                                                                        context) =>
-                                                                    Reservar())),
-                                                  );
-                                            },
-                                            child: Text("Resevar",
-                                                style: TextStyle(
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.05,
-                                                    fontFamily: 'alkbold'))),
+                                        child: Text(" "),
                                       ),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      Text(controlh.listarHotel![index].nombre,
+                                      Text(" ",
                                           style: TextStyle(
                                               fontSize: MediaQuery.of(context)
                                                       .size
@@ -187,9 +130,7 @@ class _ListHotelesState extends State<ListHoteles> {
                                   ),
                                   Row(
                                     children: [
-                                      Text(
-                                          controlh
-                                              .listarHotel![index].descripcion,
+                                      Text(" ",
                                           style: TextStyle(
                                               fontSize: MediaQuery.of(context)
                                                       .size
