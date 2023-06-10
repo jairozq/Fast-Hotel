@@ -1,6 +1,4 @@
-//import 'package:fasthotel/domain/controller/controllerHotel.dart';
 import 'package:flutter/material.dart';
-//import 'package:get/get.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});

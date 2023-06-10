@@ -33,10 +33,6 @@ class _Bnavigator extends State<Bnavigator> {
             icon: Icon(Icons.home),
             label: "Inicio",
           ),
-          /*BottomNavigationBarItem(
-            icon: Icon(Icons.assignment_add),
-            label: "Reservar",
-          ),*/
           BottomNavigationBarItem(
             icon: Icon(Icons.assignment_rounded),
             label: "Reservas",

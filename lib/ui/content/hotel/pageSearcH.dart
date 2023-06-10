@@ -1,11 +1,11 @@
 import 'package:fasthotel/domain/controller/controllerHotel.dart';
-import 'package:fasthotel/ui/content/client/pageHome.dart';
-import 'package:fasthotel/ui/content/client/pageReservation.dart';
+import 'package:fasthotel/ui/content/hotel/pageReservationH.dart';
+import 'package:fasthotel/ui/content/hotel/pageHistoryH.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
-
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ListHoteles extends StatefulWidget {
   const ListHoteles({super.key});
@@ -14,7 +14,7 @@ class ListHoteles extends StatefulWidget {
   State<ListHoteles> createState() => _ListHotelesState();
 }
 
-//Cambiar para buscar reseñas
+//Cambiar para buscar reservas
 
 cargarDatos() async {
   SharedPreferences pref = await SharedPreferences.getInstance();
@@ -37,6 +37,12 @@ class _ListHotelesState extends State<ListHoteles> {
       return foto;
     }
 
+    modificarIdex() {
+      setState(() {
+        idexh = 0;
+      });
+    }
+
     return Scaffold(
       body: Column(
         children: [
@@ -49,17 +55,18 @@ class _ListHotelesState extends State<ListHoteles> {
               controller: search,
               maxLines: 1,
               style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.height * 0.01),
+                  fontSize: MediaQuery.of(context).size.height * 0.02),
               decoration: InputDecoration(
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.search_rounded),
                   onPressed: () {
+                    modificarIdex();
                     controlh.filterHotels(search.text).then((value) =>
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    const HomePage())));
+                                    const HomePageH())));
                   },
                 ),
                 fillColor: Colors.grey.shade100,
@@ -75,16 +82,16 @@ class _ListHotelesState extends State<ListHoteles> {
               ? Container(
                   alignment: Alignment.center,
                   child: Text(
-                    "No hay resultados",
+                    "No hay reseñas que coincidan",
                     style: TextStyle(
                         color: Colors.grey,
                         fontFamily: "alkreg",
-                        fontSize: MediaQuery.of(context).size.width * 0.08),
+                        fontSize: MediaQuery.of(context).size.width * 0.076),
                   ))
               : Expanded(
                   child: ListView.builder(
                     itemCount: controlh.listarHotel!.length,
-                    itemBuilder: (BuildContext context, int idex) {
+                    itemBuilder: (BuildContext context, int index) {
                       return Container(
                         alignment: AlignmentDirectional.center,
                         width: MediaQuery.of(context).size.width,
@@ -100,7 +107,7 @@ class _ListHotelesState extends State<ListHoteles> {
                                             opacity: 70,
                                             fit: BoxFit.cover,
                                             image: MemoryImage(decodeimage(
-                                                controlh.listarHotel![idex]
+                                                controlh.listarHotel![index]
                                                     .imagen)))),
                                     width: MediaQuery.of(context).size.width,
                                     height: MediaQuery.of(context).size.height *
@@ -109,7 +116,7 @@ class _ListHotelesState extends State<ListHoteles> {
                                       child: ClipOval(
                                         child: Image.memory(
                                           decodeimage(controlh
-                                              .listarHotel![idex].imagen),
+                                              .listarHotel![index].imagen),
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .height *
@@ -144,7 +151,7 @@ class _ListHotelesState extends State<ListHoteles> {
                                               cargarDatos();
                                               controlh
                                                   .searchHotels(controlh
-                                                      .listarHotel![idex]
+                                                      .listarHotel![index]
                                                       .direccion)
                                                   .then(
                                                     (value) => Navigator
@@ -169,7 +176,7 @@ class _ListHotelesState extends State<ListHoteles> {
                                   ),
                                   Row(
                                     children: [
-                                      Text(controlh.listarHotel![idex].nombre,
+                                      Text(controlh.listarHotel![index].nombre,
                                           style: TextStyle(
                                               fontSize: MediaQuery.of(context)
                                                       .size
@@ -182,7 +189,7 @@ class _ListHotelesState extends State<ListHoteles> {
                                     children: [
                                       Text(
                                           controlh
-                                              .listarHotel![idex].descripcion,
+                                              .listarHotel![index].descripcion,
                                           style: TextStyle(
                                               fontSize: MediaQuery.of(context)
                                                       .size

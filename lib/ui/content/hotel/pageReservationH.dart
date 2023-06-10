@@ -1,6 +1,6 @@
 import 'package:fasthotel/domain/controller/controllerHotel.dart';
 import 'package:fasthotel/domain/controller/controllerTickets.dart';
-import 'package:fasthotel/ui/content/client/pageHome.dart';
+import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

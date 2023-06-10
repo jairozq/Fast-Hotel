@@ -1,6 +1,6 @@
 import 'package:fasthotel/ui/content/hotel/bottom_navH.dart';
 import 'package:fasthotel/ui/content/hotel/pageHistoryH.dart';
-import 'package:fasthotel/ui/content/hotel/routes.dart';
+import 'package:fasthotel/ui/content/hotel/routesH.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +17,7 @@ class HomePageH extends StatefulWidget {
 String dato = '';
 
 class _HomePageHState extends State<HomePageH> {
-  int index = idex;
+  int index = idexh;
   Bnavigator? myBNB;
 
   cargarDatos() async {

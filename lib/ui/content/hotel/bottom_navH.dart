@@ -10,7 +10,7 @@ class Bnavigator extends StatefulWidget {
 }
 
 class _Bnavigator extends State<Bnavigator> {
-  int actualpage = idex;
+  int actualpage = idexh;
 
   @override
   Widget build(BuildContext context) {

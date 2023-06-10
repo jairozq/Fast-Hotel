@@ -1,6 +1,6 @@
 import 'package:fasthotel/domain/controller/controllerHotel.dart';
 import 'package:fasthotel/domain/controller/controllerTickets.dart';
-import 'package:fasthotel/ui/content/client/pageHome.dart';
+import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +13,7 @@ class ListHistory extends StatefulWidget {
   State<ListHistory> createState() => _ListHistoryState();
 }
 
-int idex = 0;
+int idexh = 0;
 
 class _ListHistoryState extends State<ListHistory> {
   ControlTicket controlt = Get.put(ControlTicket());
@@ -21,23 +21,23 @@ class _ListHistoryState extends State<ListHistory> {
 
   cargarVista() {
     setState(() {
-      idex = 1;
+      idexh = 1;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    ControlTicket controlt = Get.put(ControlTicket());
-    print(controlt.listarTickets!.length);
     //ControlHotel controlh = Get.put(ControlHotel());
-    if (idex == 0) {
+    print(dato);
+    print(idexh);
+    if (idexh == 0) {
       cargarVista();
       //controlh.listarHotel(controlt.listarTickets
       controlt.listTicketsVig(dato.toString()).then((value) {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (BuildContext context) => const HomePage(),
+              builder: (BuildContext context) => const HomePageH(),
             ));
       });
     }
@@ -57,7 +57,8 @@ class _ListHistoryState extends State<ListHistory> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (BuildContext context) => const HomePage(),
+                            builder: (BuildContext context) =>
+                                const HomePageH(),
                           ));
                     });
                   },
@@ -76,7 +77,8 @@ class _ListHistoryState extends State<ListHistory> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (BuildContext context) => const HomePage(),
+                            builder: (BuildContext context) =>
+                                const HomePageH(),
                           ));
                     });
                   },
@@ -184,7 +186,7 @@ class _ListHistoryState extends State<ListHistory> {
                                                         MaterialPageRoute(
                                                           builder: (BuildContext
                                                                   context) =>
-                                                              const HomePage(),
+                                                              const HomePageH(),
                                                         ));
                                                   });
                                                 },

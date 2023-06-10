@@ -1,6 +1,8 @@
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fasthotel/domain/controller/controllerHotel.dart';
 import 'package:fasthotel/domain/controller/controllerUser.dart';
+import 'package:fasthotel/ui/content/client/pageHistory.dart';
+import 'package:fasthotel/ui/content/hotel/pageHistoryH.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -112,6 +114,8 @@ class _LoginState extends State<Login> {
                                         shouldIconPulse: true,
                                         backgroundColor: Colors.red);
                                   } else {
+                                    idex = 0;
+                                    idexh = 0;
                                     guardaId(controlu
                                         .listarAccessLogin![0].iduser
                                         .toString());

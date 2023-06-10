@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ListHistory extends StatefulWidget {
-  const ListHistory({
-    super.key,
-  });
+  const ListHistory({super.key});
 
   @override
   State<ListHistory> createState() => _ListHistoryState();
@@ -27,8 +25,6 @@ class _ListHistoryState extends State<ListHistory> {
 
   @override
   Widget build(BuildContext context) {
-    ControlTicket controlt = Get.put(ControlTicket());
-    print(controlt.listarTickets!.length);
     //ControlHotel controlh = Get.put(ControlHotel());
     if (idex == 0) {
       cargarVista();
