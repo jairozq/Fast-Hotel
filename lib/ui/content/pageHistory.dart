@@ -135,41 +135,57 @@ class _ListHistoryState extends State<ListHistory> {
                                                   0.045,
                                               fontFamily: 'alkbold')),
                                     ),
-                                    Container(
-                                      child: TextButton(
-                                          onPressed: () {
-                                            controlt
-                                                .cancelarTickets(controlt
-                                                    .listarTickets![index]
-                                                    .ticketId
-                                                    .toString())
-                                                .then((value) {
-                                              Get.snackbar(
-                                                  "Ticket",
-                                                  controlt.listaMensajes![0]
-                                                      .mensaje,
-                                                  duration: const Duration(
-                                                      seconds: 3),
-                                                  icon: const Icon(Icons.info),
-                                                  shouldIconPulse: true,
-                                                  backgroundColor: controlt
-                                                              .listaMensajes![0]
-                                                              .mensaje ==
-                                                          'Ticket Cancelado'
-                                                      ? Colors.green
-                                                      : Colors.red);
-                                            });
-                                          },
-                                          child: Text("Cancelar",
+                                    controlt.listarTickets![index].estado ==
+                                            'Vencida'
+                                        ? Container(
+                                            child: Text(
+                                              "Expirado",
                                               style: TextStyle(
-                                                  color: Colors.red,
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          0.035,
-                                                  fontFamily: 'alkbold'))),
-                                    )
+                                                color: Colors.red,
+                                                fontFamily: "alkreg",
+                                              ),
+                                            ),
+                                          )
+                                        : Container(
+                                            child: TextButton(
+                                                onPressed: () {
+                                                  controlt
+                                                      .cancelarTickets(controlt
+                                                          .listarTickets![index]
+                                                          .ticketId
+                                                          .toString())
+                                                      .then((value) {
+                                                    Get.snackbar(
+                                                        "Ticket",
+                                                        controlt
+                                                            .listaMensajes![0]
+                                                            .mensaje,
+                                                        duration:
+                                                            const Duration(
+                                                                seconds: 3),
+                                                        icon: const Icon(
+                                                            Icons.info),
+                                                        shouldIconPulse: true,
+                                                        backgroundColor: controlt
+                                                                    .listaMensajes![
+                                                                        0]
+                                                                    .mensaje ==
+                                                                'Ticket Cancelado'
+                                                            ? Colors.green
+                                                            : Colors.red);
+                                                  });
+                                                },
+                                                child: Text("Cancelar",
+                                                    style: TextStyle(
+                                                        color: Colors.red,
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.035,
+                                                        fontFamily:
+                                                            'alkbold'))),
+                                          )
                                   ],
                                 ),
                                 Row(
