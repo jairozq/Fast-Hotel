@@ -179,7 +179,7 @@ class _ListHistoryState extends State<ListHistory> {
                                                       .listTicketsVig(
                                                           dato.toString())
                                                       .then((value) {
-                                                    Navigator.push(
+                                                    Navigator.pushReplacement(
                                                         context,
                                                         MaterialPageRoute(
                                                           builder: (BuildContext
