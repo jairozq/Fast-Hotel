@@ -122,7 +122,7 @@ class _LoginState extends State<Login> {
                                           (value) => Get.toNamed("/homePage"));
                                     } else {
                                       controlh.listHotels().then(
-                                          (value) => Get.toNamed("/homeHotel"));
+                                          (value) => Get.toNamed("/homePageH"));
                                     }
                                   }
                                 });

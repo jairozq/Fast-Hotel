@@ -1,4 +1,5 @@
 import 'package:fasthotel/ui/content/client/pageHome.dart';
+import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
 import 'package:fasthotel/ui/auth/registerHotel.dart';
 import 'package:fasthotel/ui/auth/registerUser.dart';
 import 'package:fasthotel/ui/auth/login.dart';
@@ -17,6 +18,7 @@ class App extends StatelessWidget {
       initialRoute: '/login',
       routes: {
         "/homePage": (context) => const HomePage(),
+        "/homePageH": (context) => const HomePageH(),
         "/login": (context) => const Login(),
         "/registerHotel": (context) => const RegisterHotel(),
         "/registerUser": (context) => const RegisterUser(),
