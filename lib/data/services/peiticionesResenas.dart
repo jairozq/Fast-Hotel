@@ -1,9 +1,8 @@
-import 'dart:convert';
 import 'package:fasthotel/domain/models/resena.dart';
-import 'package:fasthotel/domain/models/tickets.dart';
 import 'package:fasthotel/domain/models/utiles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class PeticionesResenas {
   static Future<List<Mensajes>> registrarResena(
@@ -32,6 +31,9 @@ class PeticionesResenas {
         Uri.parse("https://fatshotel.000webhostapp.com/consultarResenaP.php");
     final response = await http.post(url, body: {'idHotel': idHotel});
 
+    print(response.statusCode);
+    print(response.body);
+
     return compute(convertirAlista2, response.body);
   }
 
@@ -45,6 +47,6 @@ class PeticionesResenas {
 
   static List<Resena> convertirAlista2(String responsebody) {
     final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
-    return pasar.map<Ticket>((json) => Ticket.desdeJson(json)).toList();
+    return pasar.map<Resena>((json) => Resena.desdeJson(json)).toList();
   }
 }
