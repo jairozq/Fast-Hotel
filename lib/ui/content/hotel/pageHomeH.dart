@@ -40,7 +40,6 @@ class _HomePageHState extends State<HomePageH> {
 
   @override
   Widget build(BuildContext context) {
-    print("Home $index");
     return Scaffold(
       bottomNavigationBar: myBNB,
       body: Routes(index: index),

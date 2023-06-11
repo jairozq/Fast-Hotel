@@ -26,7 +26,6 @@ class _ListRsenaState extends State<ListRsena> {
 
   @override
   Widget build(BuildContext context) {
-    print("reseñas $idexh");
     if (idexh == 0) {
       cargarVista();
       controlr.listResenasP(dato.toString()).then((value) {

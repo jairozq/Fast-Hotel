@@ -28,7 +28,6 @@ class _ListHotelesState extends State<ListHoteles> {
   Widget build(BuildContext context) {
     ControlTicket controlt = Get.put(ControlTicket());
     TextEditingController search = TextEditingController();
-    print("search $idexh");
 
     modificarIdex() {
       setState(() {
