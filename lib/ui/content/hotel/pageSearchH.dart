@@ -1,5 +1,4 @@
 import 'package:fasthotel/domain/controller/controllerTickets.dart';
-import 'package:fasthotel/ui/content/hotel/pageResenasH.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +34,6 @@ class _ListHotelesState extends State<ListHoteles> {
       });
     }
 
-    //print(controlt.listarHotel!);
     return RefreshIndicator(
       triggerMode: RefreshIndicatorTriggerMode.onEdge,
       edgeOffset: 20,
@@ -92,8 +90,8 @@ class _ListHotelesState extends State<ListHoteles> {
                           alignment: Alignment.center,
                           child: Text(
                             texto == 0
-                                ? "No hay reseñas"
-                                : "No hay reseñas que coincidan",
+                                ? "No hay reservas"
+                                : "No hay reserva que coincidan",
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontFamily: "alkreg",

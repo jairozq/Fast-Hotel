@@ -44,7 +44,7 @@ class _ReservarState extends State<Reservar> {
                       hintStyle: const TextStyle(color: Colors.black),
                       fillColor: Colors.grey.shade100,
                       filled: true,
-                      hintText: controlh.listarHotel![0].nombre,
+                      hintText: controlh.listarHotels![0].nombre,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -61,7 +61,7 @@ class _ReservarState extends State<Reservar> {
                       hintStyle: const TextStyle(color: Colors.black),
                       fillColor: Colors.grey.shade100,
                       filled: true,
-                      hintText: controlh.listarHotel![0].direccion,
+                      hintText: controlh.listarHotels![0].direccion,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -191,8 +191,8 @@ class _ReservarState extends State<Reservar> {
                         controlt
                             .crearTicket(
                           dato,
-                          controlh.listarHotel![0].nombre,
-                          controlh.listarHotel![0].direccion,
+                          controlh.listarHotels![0].nombre,
+                          controlh.listarHotels![0].direccion,
                           detalle.text,
                           fechaInicio.toString(),
                           fechaFinal.toString(),

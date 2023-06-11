@@ -33,5 +33,5 @@ class ControlHotel extends GetxController {
   }
 
   List<Mensajes>? get listaMensajes => _listarMensajes.value;
-  List<Hotel>? get listarHotel => _listarHotel.value;
+  List<Hotel>? get listarHotels => _listarHotel.value;
 }

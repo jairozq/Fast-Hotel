@@ -1,4 +1,4 @@
-import 'package:fasthotel/ui/content/hotel/pageResenasH.dart';
+import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
 import 'package:flutter/material.dart';
 
 class Bnavigator extends StatefulWidget {
@@ -10,8 +10,6 @@ class Bnavigator extends StatefulWidget {
 }
 
 class _Bnavigator extends State<Bnavigator> {
-  int actualpage = idexh;
-
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -21,10 +19,10 @@ class _Bnavigator extends State<Bnavigator> {
         selectedFontSize: MediaQuery.of(context).size.width * 0.04,
         unselectedLabelStyle: const TextStyle(fontFamily: "alksemb"),
         unselectedFontSize: MediaQuery.of(context).size.width * 0.03,
-        currentIndex: actualpage,
+        currentIndex: idexh,
         onTap: (index) {
           setState(() {
-            actualpage = index;
+            idexh = index;
             widget.currentIndex(index);
           });
         },

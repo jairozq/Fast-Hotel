@@ -1,5 +1,4 @@
 import 'package:fasthotel/ui/content/hotel/bottom_navH.dart';
-import 'package:fasthotel/ui/content/hotel/pageResenasH.dart';
 import 'package:fasthotel/ui/content/hotel/routesH.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +13,7 @@ class HomePageH extends StatefulWidget {
   State<HomePageH> createState() => _HomePageHState();
 }
 
+int idexh = 0;
 String dato = '';
 
 class _HomePageHState extends State<HomePageH> {

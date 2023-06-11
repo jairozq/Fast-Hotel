@@ -13,8 +13,6 @@ class ListRsena extends StatefulWidget {
   State<ListRsena> createState() => _ListRsenaState();
 }
 
-int idexh = 0;
-
 class _ListRsenaState extends State<ListRsena> {
   ControlResena controlr = Get.put(ControlResena());
 
