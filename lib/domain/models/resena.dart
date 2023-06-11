@@ -1,5 +1,5 @@
 class Resena {
-  late int idHotel;
+  late String idHotel;
   late String resena;
   late double estrellas;
 
@@ -11,9 +11,10 @@ class Resena {
 
   factory Resena.desdeJson(Map<String, dynamic> jsonMap) {
     return Resena(
-      idHotel: int.parse(jsonMap['idHotel']),
-      resena: jsonMap['resena'],
-      estrellas: double.parse(jsonMap['estrellas'],)
-    );
+        idHotel: jsonMap['idHotel'],
+        resena: jsonMap['resena'],
+        estrellas: double.parse(
+          jsonMap['estrellas'],
+        ));
   }
 }

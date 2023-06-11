@@ -1,6 +1,7 @@
 import 'package:fasthotel/domain/controller/controllerResena.dart';
 import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 class ListRsena extends StatefulWidget {
@@ -16,7 +17,6 @@ int idexh = 0;
 
 class _ListRsenaState extends State<ListRsena> {
   ControlResena controlr = Get.put(ControlResena());
-  //ControlHotel controlh = Get.put(ControlHotel());
 
   cargarVista() {
     setState(() {
@@ -26,12 +26,8 @@ class _ListRsenaState extends State<ListRsena> {
 
   @override
   Widget build(BuildContext context) {
-    //ControlHotel controlh = Get.put(ControlHotel());
-    print(dato);
-    print(idexh);
     if (idexh == 0) {
       cargarVista();
-      //controlh.listarHotel(controlt.listarTickets
       controlr.listResenasP(dato.toString()).then((value) {
         Navigator.push(
             context,
@@ -109,7 +105,27 @@ class _ListRsenaState extends State<ListRsena> {
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.15,
                       child: Column(
-                        children: [],
+                        children: [
+                          Card(
+                            child: Column(children: [
+                              RatingBar.builder(
+                                itemSize: 30,
+                                itemCount: 5,
+                                initialRating:
+                                    controlr.listarResenas![index].estrellas,
+                                itemBuilder: (context, _) {
+                                  return Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  );
+                                },
+                                onRatingUpdate: (raiting) {
+                                  print(raiting);
+                                },
+                              ),
+                            ]),
+                          )
+                        ],
                       ),
                     );
                   },
