@@ -17,10 +17,10 @@ class ControlResena extends GetxController {
     _listarResena.value = await PeticionesResenas.listarResenaP(idHotel);
   }
 
-  Future<void> listResenaN(String idHotel) async {
+  Future<void> listResenasN(String idHotel) async {
     _listarResena.value = await PeticionesResenas.listarResenaN(idHotel);
   }
 
   List<Mensajes>? get listaMensajes => _listarMensajes.value;
-  List<Resena>? get listarHotel => _listarResena.value;
+  List<Resena>? get listarResenas => _listarResena.value;
 }

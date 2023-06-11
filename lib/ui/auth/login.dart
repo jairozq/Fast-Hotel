@@ -1,7 +1,8 @@
 import 'package:fasthotel/domain/controller/controllerHotel.dart';
+import 'package:fasthotel/domain/controller/controllerTickets.dart';
 import 'package:fasthotel/domain/controller/controllerUser.dart';
 import 'package:fasthotel/ui/content/client/pageHistory.dart';
-import 'package:fasthotel/ui/content/hotel/pageHistoryH.dart';
+import 'package:fasthotel/ui/content/hotel/pageResenasH.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,6 +27,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     ControlUser controlu = Get.find();
     ControlHotel controlh = Get.put(ControlHotel());
+    ControlTicket controlt = Get.put(ControlTicket());
 
     TextEditingController user = TextEditingController();
     TextEditingController pass = TextEditingController();
@@ -125,7 +127,7 @@ class _LoginState extends State<Login> {
                                       controlh.listHotels().then(
                                           (value) => Get.toNamed("/homePage"));
                                     } else {
-                                      controlh.listHotels().then(
+                                      controlt.listTickets().then(
                                           (value) => Get.toNamed("/homePageH"));
                                     }
                                   }

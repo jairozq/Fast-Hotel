@@ -36,6 +36,10 @@ class ControlTicket extends GetxController {
     _listarTickets.value = await PeticionesTicket.filtrarTickets(user);
   }
 
+  Future<void> listTickets() async {
+    _listarTickets.value = await PeticionesTicket.listTickets();
+  }
+
   List<Mensajes>? get listaMensajes => _listarMensajes.value;
   List<Ticket>? get listarTickets => _listarTickets.value;
 }

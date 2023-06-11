@@ -1,4 +1,4 @@
-import 'package:fasthotel/ui/content/hotel/pageHistoryH.dart';
+import 'package:fasthotel/ui/content/hotel/pageResenasH.dart';
 import 'package:fasthotel/ui/content/hotel/pageProfileH.dart';
 import 'package:fasthotel/ui/content/hotel/pageReservationH.dart';
 import 'package:fasthotel/ui/content/hotel/pageSearchH.dart';
@@ -12,7 +12,7 @@ class Routes extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> myList = [
       const ListHoteles(),
-      const ListHistory(),
+      const ListRsena(),
       const Profile(),
       const Reservar(),
     ];

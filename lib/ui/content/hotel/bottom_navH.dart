@@ -1,4 +1,4 @@
-import 'package:fasthotel/ui/content/hotel/pageHistoryH.dart';
+import 'package:fasthotel/ui/content/hotel/pageResenasH.dart';
 import 'package:flutter/material.dart';
 
 class Bnavigator extends StatefulWidget {

@@ -65,6 +65,13 @@ class PeticionesTicket {
     return compute(convertirAlista2, response.body);
   }
 
+  static Future<List<Ticket>> listTickets() async {
+    var url = Uri.parse("https://fatshotel.000webhostapp.com/buscarTicket.php");
+    final response = await http.get(url);
+
+    return compute(convertirAlista2, response.body);
+  }
+
   static List<Ticket> convertirAlista2(String responsebody) {
     final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
     return pasar.map<Ticket>((json) => Ticket.desdeJson(json)).toList();
