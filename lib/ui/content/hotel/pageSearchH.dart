@@ -84,17 +84,26 @@ class _ListHotelesState extends State<ListHoteles> {
               ),
             ),
             controlt.listarTickets!.isEmpty
-                ? Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      texto == 0
-                          ? "No hay reseñas"
-                          : "No hay reseñas que coincidan",
-                      style: TextStyle(
-                          color: Colors.grey,
-                          fontFamily: "alkreg",
-                          fontSize: MediaQuery.of(context).size.width * 0.076),
-                    ))
+                ? Expanded(
+                    child: ListView.builder(
+                      itemCount: 1,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            texto == 0
+                                ? "No hay reseñas"
+                                : "No hay reseñas que coincidan",
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontFamily: "alkreg",
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.076),
+                          ),
+                        );
+                      },
+                    ),
+                  )
                 : Expanded(
                     child: ListView.builder(
                       itemCount: controlt.listarTickets!.length,

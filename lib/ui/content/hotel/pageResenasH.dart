@@ -101,31 +101,41 @@ class _ListRsenaState extends State<ListRsena> {
                   itemCount: controlr.listarResenas!.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      alignment: AlignmentDirectional.center,
+                      alignment: Alignment.topLeft,
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.15,
-                      child: Column(
-                        children: [
-                          Card(
-                            child: Column(children: [
-                              RatingBar.builder(
-                                itemSize: 30,
-                                itemCount: 5,
-                                initialRating:
-                                    controlr.listarResenas![index].estrellas,
-                                itemBuilder: (context, _) {
-                                  return Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                  );
-                                },
-                                onRatingUpdate: (raiting) {
-                                  print(raiting);
-                                },
+                      child: Card(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Text(controlr.listarResenas![index].fecha),
+                                  Container(
+                                    decoration:
+                                        BoxDecoration(border: Border.all()),
+                                    child: RatingBar.builder(
+                                      itemSize: 10,
+                                      itemCount: 5,
+                                      initialRating: controlr
+                                          .listarResenas![index].estrellas,
+                                      itemBuilder: (context, _) {
+                                        return Icon(
+                                          Icons.star_rounded,
+                                          color: Colors.amber,
+                                        );
+                                      },
+                                      onRatingUpdate: (raiting) {
+                                        print(raiting);
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ]),
-                          )
-                        ],
+                            ],
+                          ),
+                        ),
                       ),
                     );
                   },

@@ -31,9 +31,6 @@ class PeticionesResenas {
         Uri.parse("https://fatshotel.000webhostapp.com/consultarResenaP.php");
     final response = await http.post(url, body: {'idHotel': idHotel});
 
-    print(response.statusCode);
-    print(response.body);
-
     return compute(convertirAlista2, response.body);
   }
 

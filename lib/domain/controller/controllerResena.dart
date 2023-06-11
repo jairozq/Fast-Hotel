@@ -15,7 +15,6 @@ class ControlResena extends GetxController {
 
   Future<void> listResenasP(String idHotel) async {
     _listarResena.value = await PeticionesResenas.listarResenaP(idHotel);
-    print("2");
   }
 
   Future<void> listResenasN(String idHotel) async {
