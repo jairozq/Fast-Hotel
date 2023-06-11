@@ -42,6 +42,9 @@ class PeticionesAccess {
         Uri.parse("https://fatshotel.000webhostapp.com/validarAccess.php");
     final response = await http.post(url, body: {'user': user, 'pass': pass});
 
+    print(response.statusCode);
+    print(response.body);
+
     return compute(convertirAlista2, response.body);
   }
 

@@ -26,6 +26,7 @@ class _ListHotelesState extends State<ListHoteles> {
 
   @override
   Widget build(BuildContext context) {
+    print("entro");
     ControlTicket controlt = Get.put(ControlTicket());
     TextEditingController search = TextEditingController();
 

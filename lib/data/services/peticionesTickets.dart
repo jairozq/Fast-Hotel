@@ -66,7 +66,8 @@ class PeticionesTicket {
   }
 
   static Future<List<Ticket>> listTickets() async {
-    var url = Uri.parse("https://fatshotel.000webhostapp.com/buscarTicket.php");
+    var url =
+        Uri.parse("https://fatshotel.000webhostapp.com/listarTickets.php");
     final response = await http.get(url);
 
     return compute(convertirAlista2, response.body);
@@ -74,6 +75,7 @@ class PeticionesTicket {
 
   static List<Ticket> convertirAlista2(String responsebody) {
     final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
+    print("object");
     return pasar.map<Ticket>((json) => Ticket.desdeJson(json)).toList();
   }
 }
