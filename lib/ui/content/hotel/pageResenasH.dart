@@ -91,9 +91,10 @@ class _ListRsenaState extends State<ListRsena> {
                 child: Text(
                   "No hay reservaciones en el registro",
                   style: TextStyle(
-                      color: Colors.grey,
-                      fontFamily: "alkreg",
-                      fontSize: MediaQuery.of(context).size.width * 0.06),
+                    color: Colors.grey,
+                    fontFamily: "alkreg",
+                    fontSize: MediaQuery.of(context).size.width * 0.06,
+                  ),
                 ),
               )
             : Expanded(
@@ -110,13 +111,21 @@ class _ListRsenaState extends State<ListRsena> {
                           child: Row(
                             children: [
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(controlr.listarResenas![index].fecha),
+                                  Text(
+                                    controlr.listarResenas![index].fecha,
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontFamily: "alkreg",
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.02,
+                                    ),
+                                  ),
                                   Container(
-                                    decoration:
-                                        BoxDecoration(border: Border.all()),
                                     child: RatingBar.builder(
-                                      itemSize: 10,
+                                      itemSize: 15,
                                       itemCount: 5,
                                       initialRating: controlr
                                           .listarResenas![index].estrellas,
@@ -129,6 +138,16 @@ class _ListRsenaState extends State<ListRsena> {
                                       onRatingUpdate: (raiting) {
                                         print(raiting);
                                       },
+                                    ),
+                                  ),
+                                  Text(
+                                    controlr.listarResenas![index].resena,
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontFamily: "alkreg",
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.04,
                                     ),
                                   ),
                                 ],
