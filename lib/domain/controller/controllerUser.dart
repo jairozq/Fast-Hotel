@@ -20,7 +20,6 @@ class ControlUser extends GetxController {
 
   Future<void> validarUser(String u, String p) async {
     _listarAccess.value = await PeticionesAccess.validarAccess(u, p);
-    print("aca");
   }
 
   Future<void> buscarUser(String id) async {

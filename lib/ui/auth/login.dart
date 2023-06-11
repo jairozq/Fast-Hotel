@@ -127,9 +127,11 @@ class _LoginState extends State<Login> {
                                       controlh.listHotels().then(
                                           (value) => Get.toNamed("/homePage"));
                                     } else {
-                                      print("aca2");
-                                      controlt.listTickets().then(
-                                          (value) => Get.toNamed("/homePageH"));
+                                      controlt
+                                          .listTickets(controlu
+                                              .listarAccessLogin![0].iduser)
+                                          .then((value) =>
+                                              Get.toNamed("/homePageH"));
                                     }
                                   }
                                 });

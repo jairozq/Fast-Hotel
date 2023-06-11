@@ -22,11 +22,10 @@ cargarDatos() async {
 String? actualpage;
 
 class _ListHotelesState extends State<ListHoteles> {
-  String texto = "No hay reseñas";
+  int? texto;
 
   @override
   Widget build(BuildContext context) {
-    print("entro");
     ControlTicket controlt = Get.put(ControlTicket());
     TextEditingController search = TextEditingController();
 
@@ -40,11 +39,12 @@ class _ListHotelesState extends State<ListHoteles> {
     return RefreshIndicator(
       triggerMode: RefreshIndicatorTriggerMode.onEdge,
       edgeOffset: 20,
-      displacement: 200,
+      displacement: MediaQuery.of(context).size.height * 0.1,
       strokeWidth: 5,
       color: Colors.cyan,
       onRefresh: () async {
-        controlt.listTickets().then((value) => Get.toNamed("/homePageH"));
+        modificarIdex();
+        controlt.listTickets(dato).then((value) => Get.toNamed("/homePageH"));
       },
       child: Scaffold(
         body: Column(
@@ -55,6 +55,7 @@ class _ListHotelesState extends State<ListHoteles> {
               width: MediaQuery.of(context).size.width * 0.9,
               height: MediaQuery.of(context).size.height * 0.05,
               child: TextField(
+                keyboardType: TextInputType.number,
                 controller: search,
                 maxLines: 1,
                 style: TextStyle(
@@ -63,9 +64,9 @@ class _ListHotelesState extends State<ListHoteles> {
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.search_rounded),
                     onPressed: () {
-                      texto = "No hay reseñas que coincidan";
+                      texto = 1;
                       modificarIdex();
-                      controlt.filtrarTickets(search.text).then((value) =>
+                      controlt.filtrarTickets(search.text, dato).then((value) =>
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -86,7 +87,9 @@ class _ListHotelesState extends State<ListHoteles> {
                 ? Container(
                     alignment: Alignment.center,
                     child: Text(
-                      texto,
+                      texto == 0
+                          ? "No hay reseñas"
+                          : "No hay reseñas que coincidan",
                       style: TextStyle(
                           color: Colors.grey,
                           fontFamily: "alkreg",
@@ -99,60 +102,122 @@ class _ListHotelesState extends State<ListHoteles> {
                         return Container(
                           alignment: AlignmentDirectional.center,
                           width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.4,
+                          height: MediaQuery.of(context).size.height * 0.15,
                           child: Column(
                             children: [
                               Card(
                                 child: Column(
                                   children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.25,
-                                      child: Text(""),
-                                    ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Container(
-                                          margin: EdgeInsets.only(
-                                              top: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.01),
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.3,
+                                              0.83,
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .height *
                                               0.05,
-                                          child: Text(" "),
+                                          child: Text(
+                                            " ID: ${controlt.listarTickets![index].ticketId}",
+                                            style: TextStyle(
+                                                fontFamily: "alkreg",
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.076),
+                                          ),
+                                        ),
+                                        Text(
+                                          "${controlt.listarTickets![index].estado}",
+                                          style: TextStyle(
+                                              color: controlt
+                                                          .listarTickets![index]
+                                                          .estado ==
+                                                      'Vigente'
+                                                  ? Colors.green
+                                                  : Colors.red,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.04,
+                                              fontFamily: 'alkmed'),
                                         ),
                                       ],
                                     ),
                                     Row(
                                       children: [
-                                        Text(" ",
-                                            style: TextStyle(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.045,
-                                                fontFamily: 'alkbold')),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(" ",
-                                            style: TextStyle(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.035,
-                                                fontFamily: 'alkreg')),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.8,
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Cedula: ${controlt.listarTickets![index].idUser}",
+                                                    style: TextStyle(
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.04,
+                                                        fontFamily: 'alkmed'),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Número de cuarto: ${controlt.listarTickets![index].habitacion}",
+                                                    style: TextStyle(
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.035,
+                                                        fontFamily: 'alkmed'),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Text(
+                                                    "${controlt.listarTickets![index].fechaInicio}",
+                                                    style: TextStyle(
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.03,
+                                                        fontFamily: 'alkmed'),
+                                                  ),
+                                                  Text(
+                                                    "${controlt.listarTickets![index].fechaFinal}",
+                                                    style: TextStyle(
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.03,
+                                                        fontFamily: 'alkmed'),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ],

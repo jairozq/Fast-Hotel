@@ -58,24 +58,23 @@ class PeticionesTicket {
     return compute(convertirAlista2, response.body);
   }
 
-  static Future<List<Ticket>> filtrarTickets(String user) async {
+  static Future<List<Ticket>> filtrarTickets(String user, String idHotel) async {
     var url = Uri.parse("https://fatshotel.000webhostapp.com/buscarTicket.php");
-    final response = await http.post(url, body: {'user': user});
+    final response = await http.post(url, body: {'idUser': user, 'idHotel': idHotel});
 
     return compute(convertirAlista2, response.body);
   }
 
-  static Future<List<Ticket>> listTickets() async {
+  static Future<List<Ticket>> listTickets(String idHotel) async {
     var url =
         Uri.parse("https://fatshotel.000webhostapp.com/listarTickets.php");
-    final response = await http.get(url);
+    final response = await http.post(url, body: {'idHotel': idHotel});
 
     return compute(convertirAlista2, response.body);
   }
 
   static List<Ticket> convertirAlista2(String responsebody) {
     final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
-    print("object");
     return pasar.map<Ticket>((json) => Ticket.desdeJson(json)).toList();
   }
 }
