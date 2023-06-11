@@ -1,4 +1,5 @@
 import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
+import 'package:fasthotel/ui/content/hotel/pageResenasH.dart';
 import 'package:flutter/material.dart';
 
 class Bnavigator extends StatefulWidget {
@@ -20,9 +21,9 @@ class _Bnavigator extends State<Bnavigator> {
         unselectedLabelStyle: const TextStyle(fontFamily: "alksemb"),
         unselectedFontSize: MediaQuery.of(context).size.width * 0.03,
         currentIndex: idexh,
-        onTap: (index) {
+        onTap: (i) {
           setState(() {
-            idexh = index;
+            index = i;
             widget.currentIndex(index);
           });
         },

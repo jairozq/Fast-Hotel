@@ -1,4 +1,5 @@
 import 'package:fasthotel/ui/content/hotel/bottom_navH.dart';
+import 'package:fasthotel/ui/content/hotel/pageResenasH.dart';
 import 'package:fasthotel/ui/content/hotel/routesH.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +14,10 @@ class HomePageH extends StatefulWidget {
   State<HomePageH> createState() => _HomePageHState();
 }
 
-int idexh = 0;
 String dato = '';
+int index = idexh;
 
 class _HomePageHState extends State<HomePageH> {
-  int index = idexh;
   Bnavigator? myBNB;
 
   cargarDatos() async {
@@ -40,6 +40,7 @@ class _HomePageHState extends State<HomePageH> {
 
   @override
   Widget build(BuildContext context) {
+    print("Home $index");
     return Scaffold(
       bottomNavigationBar: myBNB,
       body: Routes(index: index),

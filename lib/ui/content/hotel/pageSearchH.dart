@@ -1,4 +1,5 @@
 import 'package:fasthotel/domain/controller/controllerTickets.dart';
+import 'package:fasthotel/ui/content/hotel/pageResenasH.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class _ListHotelesState extends State<ListHoteles> {
   Widget build(BuildContext context) {
     ControlTicket controlt = Get.put(ControlTicket());
     TextEditingController search = TextEditingController();
+    print("search $idexh");
 
     modificarIdex() {
       setState(() {
