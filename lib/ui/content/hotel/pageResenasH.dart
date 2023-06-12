@@ -26,7 +26,7 @@ class _ListRsenaState extends State<ListRsena> {
 
   @override
   Widget build(BuildContext context) {
-    if (idexh == 0) {
+    if (idexh != 1) {
       cargarVista();
       controlr.listResenasP(dato.toString()).then((value) {
         Navigator.push(

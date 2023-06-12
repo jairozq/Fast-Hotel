@@ -1,6 +1,8 @@
-import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
+import 'package:fasthotel/domain/controller/controllerHotel.dart';
 import 'package:fasthotel/ui/content/hotel/pageResenasH.dart';
+import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Bnavigator extends StatefulWidget {
   final Function currentIndex;
@@ -11,6 +13,8 @@ class Bnavigator extends StatefulWidget {
 }
 
 class _Bnavigator extends State<Bnavigator> {
+  ControlHotel controlh = Get.put(ControlHotel());
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -26,6 +30,9 @@ class _Bnavigator extends State<Bnavigator> {
             index = i;
             widget.currentIndex(index);
           });
+          /*if (i == 2) {
+            controlh.listHotels().then((value) => Get.toNamed("/homePageH"));
+          }*/
         },
         items: const [
           BottomNavigationBarItem(

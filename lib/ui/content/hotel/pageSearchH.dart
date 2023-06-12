@@ -24,15 +24,19 @@ String? actualpage;
 class _ListHotelesState extends State<ListHoteles> {
   int? texto;
 
+  cargarVista() {
+    setState(() {
+      idexh = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     ControlTicket controlt = Get.put(ControlTicket());
     TextEditingController search = TextEditingController();
 
-    modificarIdex() {
-      setState(() {
-        idexh = 0;
-      });
+    if (idexh != 0) {
+      cargarVista();
     }
 
     return RefreshIndicator(
@@ -42,7 +46,7 @@ class _ListHotelesState extends State<ListHoteles> {
       strokeWidth: 5,
       color: Colors.cyan,
       onRefresh: () async {
-        modificarIdex();
+        cargarVista();
         controlt.listTickets(dato).then((value) => Get.toNamed("/homePageH"));
       },
       child: Scaffold(
@@ -64,7 +68,7 @@ class _ListHotelesState extends State<ListHoteles> {
                     icon: const Icon(Icons.search_rounded),
                     onPressed: () {
                       texto = 1;
-                      modificarIdex();
+                      cargarVista();
                       controlt.filtrarTickets(search.text, dato).then((value) =>
                           Navigator.push(
                               context,
