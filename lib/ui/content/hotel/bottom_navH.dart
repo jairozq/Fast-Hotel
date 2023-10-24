@@ -27,8 +27,8 @@ class _Bnavigator extends State<Bnavigator> {
         currentIndex: idexh,
         onTap: (i) {
           setState(() {
-            index = i;
-            widget.currentIndex(index);
+            indexh = i;
+            widget.currentIndex(indexh);
           });
           /*if (i == 2) {
             controlh.listHotels().then((value) => Get.toNamed("/homePageH"));
@@ -45,7 +45,7 @@ class _Bnavigator extends State<Bnavigator> {
           ),*/
           BottomNavigationBarItem(
             icon: Icon(Icons.assignment_rounded),
-            label: "Reservas",
+            label: "Reseñas",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_box_rounded),

@@ -1,17 +1,16 @@
-import 'dart:convert';
-import 'package:fasthotel/domain/models/hotel.dart';
 import 'package:fasthotel/domain/models/utiles.dart';
+import 'package:fasthotel/domain/models/hotel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class PeticionesHotel {
   static Future<List<Mensajes>> registrarHotel(String nombre, String direccion,
-      String descripcion, String habitaciones, String? foto) async {
+      String habitaciones, String? foto) async {
     var url = Uri.parse("https://fatshotel.000webhostapp.com/agregarHotel.php");
     final response = await http.post(url, body: {
       'nombre': nombre,
       'direccion': direccion,
-      'descripcion': descripcion,
       'habitaciones': habitaciones,
       'foto': foto
     });

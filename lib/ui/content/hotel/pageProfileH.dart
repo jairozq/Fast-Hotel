@@ -1,4 +1,6 @@
+import 'package:fasthotel/domain/controller/controllerHabitacion.dart';
 import 'package:fasthotel/domain/controller/controllerHotel.dart';
+import 'package:fasthotel/ui/content/hotel/listHabicaciones.dart';
 import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
 import 'package:fasthotel/ui/content/hotel/pageResenasH.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,9 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  ControlHabitaciones controlc = Get.put(ControlHabitaciones());
   ControlHotel controlh = Get.put(ControlHotel());
+  TextEditingController descripcion = TextEditingController();
 
   decodeimage(imagen) {
     var imagen64 = (imagen).split(",")[1];
@@ -76,6 +80,20 @@ class _ProfileState extends State<Profile> {
           ),
           Container(
             child: Text(
+              controlh.listarHotels![0].descripcion.isEmpty
+                  ? "No hay una descripcion actualmente"
+                  : controlh.listarHotels![0].direccion,
+              style: TextStyle(
+                color: controlh.listarHotels![0].direccion.isEmpty
+                    ? Colors.grey
+                    : Colors.black,
+                fontFamily: "alkreg",
+                fontSize: MediaQuery.of(context).size.height * 0.02,
+              ),
+            ),
+          ),
+          Container(
+            child: Text(
               "ID:  ${controlh.listarHotels![0].direccion}",
               style: TextStyle(
                 fontFamily: "alkreg",
@@ -104,6 +122,62 @@ class _ProfileState extends State<Profile> {
                     onPressed: () {},
                     child: Text(
                       "Actualizar datos",
+                      style: TextStyle(
+                        fontFamily: "alkreg",
+                        fontSize: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                    ),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            content: Column(
+                              children: [
+                                Container(
+                                  child: TextField(
+                                    controller: descripcion,
+                                    decoration: InputDecoration(
+                                      fillColor: Colors.grey.shade100,
+                                      filled: true,
+                                      hintText:
+                                          controlh.listarHotels![0].descripcion,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Text(
+                      "Modificar descripción",
+                      style: TextStyle(
+                        fontFamily: "alkreg",
+                        fontSize: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                    ),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {
+                      controlc.listaHabitacion(dato).then(
+                            (value) => Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    ListHabitaciones(),
+                              ),
+                            ),
+                          );
+                    },
+                    child: Text(
+                      "Listar habitaciones",
                       style: TextStyle(
                         fontFamily: "alkreg",
                         fontSize: MediaQuery.of(context).size.height * 0.02,

@@ -1,6 +1,7 @@
 import 'package:fasthotel/domain/controller/controllerTickets.dart';
+import 'package:fasthotel/ui/content/hotel/pageReservationH.dart';
+import 'package:fasthotel/domain/controller/controllerHotel.dart';
 import 'package:fasthotel/ui/content/hotel/pageResenasH.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,11 +14,6 @@ class ListHoteles extends StatefulWidget {
 }
 
 //Cambiar para buscar reservas
-
-cargarDatos() async {
-  SharedPreferences pref = await SharedPreferences.getInstance();
-  dato = pref.getString("idG").toString();
-}
 
 String? actualpage;
 
@@ -32,11 +28,13 @@ class _ListHotelesState extends State<ListHoteles> {
 
   @override
   Widget build(BuildContext context) {
-    ControlTicket controlt = Get.put(ControlTicket());
     TextEditingController search = TextEditingController();
+    ControlHotel controlh = Get.put(ControlHotel());
+    ControlTicket controlt = Get.put(ControlTicket());
 
     if (idexh != 0) {
       cargarVista();
+      texto = 0;
     }
 
     return RefreshIndicator(
@@ -69,12 +67,15 @@ class _ListHotelesState extends State<ListHoteles> {
                     onPressed: () {
                       texto = 1;
                       cargarVista();
-                      controlt.filtrarTickets(search.text, dato).then((value) =>
-                          Navigator.push(
+                      controlt.filtrarTickets(search.text, dato).then(
+                            (value) => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      const HomePageH())));
+                                builder: (BuildContext context) =>
+                                    const HomePageH(),
+                              ),
+                            ),
+                          );
                     },
                   ),
                   fillColor: Colors.grey.shade100,
@@ -96,7 +97,7 @@ class _ListHotelesState extends State<ListHoteles> {
                           child: Text(
                             texto == 0
                                 ? "No hay reservas"
-                                : "No hay reserva que coincidan",
+                                : "No hay reservas que coincidan",
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontFamily: "alkreg",
@@ -242,6 +243,19 @@ class _ListHotelesState extends State<ListHoteles> {
                     ),
                   ),
           ],
+        ),
+        floatingActionButton: IconButton(
+          onPressed: () {
+            controlh.searchHotels(dato).then(
+                  (value) => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => Reservar(),
+                    ),
+                  ),
+                );
+          },
+          icon: Icon(Icons.add),
         ),
       ),
     );

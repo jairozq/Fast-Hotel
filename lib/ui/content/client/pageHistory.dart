@@ -25,10 +25,8 @@ class _ListHistoryState extends State<ListHistory> {
 
   @override
   Widget build(BuildContext context) {
-    //ControlHotel controlh = Get.put(ControlHotel());
-    if (idex == 0) {
       cargarVista();
-      //controlh.listarHotel(controlt.listarTickets
+    if (idex == 0) {
       controlt.listTicketsVig(dato.toString()).then((value) {
         Navigator.push(
             context,

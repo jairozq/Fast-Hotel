@@ -14,7 +14,11 @@ class RegisterUser extends StatelessWidget {
     TextEditingController user = TextEditingController();
     TextEditingController passw = TextEditingController();
 
-    return Container(
+    return WillPopScope(
+      onWillPop: () async {
+        Get.toNamed("/login");
+        return true;
+      },
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: Container(
@@ -134,19 +138,21 @@ class RegisterUser extends StatelessWidget {
                             controlu
                                 .crearUser(nombre.text, cedula.text,
                                     celular.text, user.text, passw.text)
-                                .then((value) {
-                              Get.snackbar('Clientes',
-                                  controlu.listaMensajes![0].mensaje,
-                                  duration: const Duration(seconds: 3),
-                                  icon: const Icon(Icons.info),
-                                  shouldIconPulse: true,
-                                  backgroundColor:
-                                      controlu.listaMensajes![0].mensaje ==
-                                              'Usuario Almacenado'
-                                          ? Colors.green
-                                          : Colors.red);
-                            });
-                            ((value) => Get.toNamed("/login"));
+                                .then(
+                              (value) {
+                                Get.snackbar('Clientes',
+                                    controlu.listaMensajes![0].mensaje,
+                                    duration: const Duration(seconds: 3),
+                                    icon: const Icon(Icons.info),
+                                    shouldIconPulse: true,
+                                    backgroundColor:
+                                        controlu.listaMensajes![0].mensaje ==
+                                                'Usuario Almacenado'
+                                            ? Colors.green
+                                            : Colors.red);
+                              },
+                            );
+                            Get.toNamed("/login");
                           },
                           child: Text(
                             '     Registrar     ',

@@ -8,12 +8,12 @@ class ControlHotel extends GetxController {
   final Rxn<List<Mensajes>> _listarMensajes = Rxn<List<Mensajes>>([]);
   final Rxn<List<Hotel>> _listarHotel = Rxn<List<Hotel>>([]);
 
-  Future<void> crearHotel(String nombre, String direccion, String descripcion,
-      String habitaciones, String? foto, String user, String pass) async {
-    _listarMensajes.value = await PeticionesHotel.registrarHotel(
-        nombre, direccion, descripcion, habitaciones, foto);
+  Future<void> crearHotel(String nombre, String direccion, String habitaciones,
+      String? foto, String user, String pass) async {
     _listarMensajes.value =
         await PeticionesAccess.registrarAccessHotel(direccion, user, pass);
+    _listarMensajes.value = await PeticionesHotel.registrarHotel(
+        nombre, direccion, habitaciones, foto);
   }
 
   Future<void> validarHotel(String user, String pass) async {

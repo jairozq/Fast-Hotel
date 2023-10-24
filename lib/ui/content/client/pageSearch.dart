@@ -22,21 +22,25 @@ cargarDatos() async {
 String? actualpage;
 
 class _ListHotelesState extends State<ListHoteles> {
+  cargarVista() {
+    setState(() {
+      idex = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     ControlHotel controlh = Get.put(ControlHotel());
     TextEditingController search = TextEditingController();
 
+    if (idex != 0) {
+      cargarVista();
+    }
+
     decodeimage(imagen) {
       var imagen64 = (imagen).split(",")[1];
       var foto = base64Decode(imagen64);
       return foto;
-    }
-
-    modificarIdex() {
-      setState(() {
-        idex = 0;
-      });
     }
 
     return RefreshIndicator(
@@ -46,7 +50,7 @@ class _ListHotelesState extends State<ListHoteles> {
       strokeWidth: 5,
       color: Colors.cyan,
       onRefresh: () async {
-        modificarIdex();
+        cargarVista();
         controlh.listHotels().then((value) => Get.toNamed("/homePage"));
       },
       child: Scaffold(
@@ -66,7 +70,7 @@ class _ListHotelesState extends State<ListHoteles> {
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.search_rounded),
                     onPressed: () {
-                      modificarIdex();
+                      cargarVista();
                       controlh.filterHotels(search.text).then((value) =>
                           Navigator.push(
                               context,
@@ -201,14 +205,15 @@ class _ListHotelesState extends State<ListHoteles> {
                                     Row(
                                       children: [
                                         Text(
-                                            controlh.listarHotels![index]
-                                                .descripcion,
-                                            style: TextStyle(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.035,
-                                                fontFamily: 'alkreg')),
+                                          controlh
+                                              .listarHotels![index].descripcion,
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.035,
+                                              fontFamily: 'alkreg'),
+                                        ),
                                       ],
                                     ),
                                   ],

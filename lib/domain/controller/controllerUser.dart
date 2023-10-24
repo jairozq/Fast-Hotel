@@ -13,9 +13,9 @@ class ControlUser extends GetxController {
   Future<void> crearUser(String nombre, String cedula, String celular,
       String user, String pass) async {
     _listarMensajes.value =
-        await PeticionesUser.registrarUser(nombre, cedula, celular);
-    _listarMensajes.value =
         await PeticionesAccess.registrarAccessUser(cedula, user, pass);
+    _listarMensajes.value =
+        await PeticionesUser.registrarUser(nombre, cedula, celular);
   }
 
   Future<void> validarUser(String u, String p) async {
