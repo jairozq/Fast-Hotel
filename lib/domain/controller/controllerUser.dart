@@ -1,8 +1,8 @@
 import 'package:fasthotel/data/services/peticionesAccess.dart';
 import 'package:fasthotel/data/services/peticionesUser.dart';
+import 'package:fasthotel/domain/models/utiles.dart';
 import 'package:fasthotel/domain/models/access.dart';
 import 'package:fasthotel/domain/models/user.dart';
-import 'package:fasthotel/domain/models/utiles.dart';
 import 'package:get/get.dart';
 
 class ControlUser extends GetxController {

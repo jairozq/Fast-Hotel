@@ -12,6 +12,7 @@ class ControlHotel extends GetxController {
       String? foto, String user, String pass) async {
     _listarMensajes.value =
         await PeticionesAccess.registrarAccessHotel(direccion, user, pass);
+
     _listarMensajes.value = await PeticionesHotel.registrarHotel(
         nombre, direccion, habitaciones, foto);
   }

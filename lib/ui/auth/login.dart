@@ -1,9 +1,9 @@
 import 'package:fasthotel/domain/controller/controllerTickets.dart';
 import 'package:fasthotel/domain/controller/controllerHotel.dart';
 import 'package:fasthotel/domain/controller/controllerUser.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fasthotel/ui/content/client/pageHome.dart';
 import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:io';
@@ -25,7 +25,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    ControlUser controlu = Get.find();
+    ControlUser controlu = Get.put(ControlUser());
     ControlHotel controlh = Get.put(ControlHotel());
     ControlTicket controlt = Get.put(ControlTicket());
 

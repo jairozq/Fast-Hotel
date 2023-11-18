@@ -18,7 +18,7 @@ class ListHoteles extends StatefulWidget {
 String? actualpage;
 
 class _ListHotelesState extends State<ListHoteles> {
-  int? texto;
+  int texto = 0;
 
   cargarVista() {
     setState(() {
@@ -34,7 +34,6 @@ class _ListHotelesState extends State<ListHoteles> {
 
     if (idexh != 0) {
       cargarVista();
-      texto = 0;
     }
 
     return RefreshIndicator(
@@ -44,7 +43,7 @@ class _ListHotelesState extends State<ListHoteles> {
       strokeWidth: 5,
       color: Colors.cyan,
       onRefresh: () async {
-        cargarVista();
+        texto = 0;
         controlt.listTickets(dato).then((value) => Get.toNamed("/homePageH"));
       },
       child: Scaffold(
@@ -56,7 +55,6 @@ class _ListHotelesState extends State<ListHoteles> {
               width: MediaQuery.of(context).size.width * 0.9,
               height: MediaQuery.of(context).size.height * 0.05,
               child: TextField(
-                keyboardType: TextInputType.number,
                 controller: search,
                 maxLines: 1,
                 style: TextStyle(
@@ -66,7 +64,6 @@ class _ListHotelesState extends State<ListHoteles> {
                     icon: const Icon(Icons.search_rounded),
                     onPressed: () {
                       texto = 1;
-                      cargarVista();
                       controlt.filtrarTickets(search.text, dato).then(
                             (value) => Navigator.push(
                               context,

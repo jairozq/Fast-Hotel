@@ -72,7 +72,6 @@ class PeticionesTicket {
         Uri.parse("https://fatshotel.000webhostapp.com/listarTickets.php");
     final response = await http.post(url, body: {'idHotel': idHotel});
 
-    print("body: ${response.body}");
     return compute(convertirAlista2, response.body);
   }
 
