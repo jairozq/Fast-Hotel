@@ -70,11 +70,11 @@ class _ListRsenaState extends State<ListRsena> {
                   onPressed: () {
                     controlr.listResenasN(dato.toString()).then((value) {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const HomePageH(),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => const HomePageH(),
+                        ),
+                      );
                     });
                   },
                   child: Text("Negativas",

@@ -33,6 +33,14 @@ class ControlHotel extends GetxController {
     _listarHotel.value = await PeticionesHotel.buscarHoteles(idhotel);
   }
 
+  Future<void> generarHabitaciones(String idhotel, int habitaciones) async {
+    for (int i = 1; i <= habitaciones; i++) {
+      _listarMensajes.value =
+          await PeticionesHotel.generarHabitaciones(idhotel, '$i');
+    }
+    _listarMensajes.value = await PeticionesHotel.cambiarEstadoHoteles(idhotel);
+  }
+
   List<Mensajes>? get listaMensajes => _listarMensajes.value;
   List<Hotel>? get listarHotels => _listarHotel.value;
 }

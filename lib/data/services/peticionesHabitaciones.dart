@@ -32,7 +32,7 @@ class PeticionesHabitaciones {
     var url =
         Uri.parse("https://fatshotel.000webhostapp.com/listaHabitaciones.php");
     final response = await http.post(url, body: {'idhotel': idhotel});
-
+    print(response.body);
     return compute(convertirAlista2, response.body);
   }
 

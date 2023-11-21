@@ -30,19 +30,12 @@ class _Bnavigator extends State<Bnavigator> {
             indexh = i;
             widget.currentIndex(indexh);
           });
-          /*if (i == 2) {
-            controlh.listHotels().then((value) => Get.toNamed("/homePageH"));
-          }*/
         },
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Inicio",
           ),
-          /*BottomNavigationBarItem(
-            icon: Icon(Icons.assignment_add),
-            label: "Reservar",
-          ),*/
           BottomNavigationBarItem(
             icon: Icon(Icons.assignment_rounded),
             label: "Reseñas",

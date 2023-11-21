@@ -1,8 +1,8 @@
 import 'package:fasthotel/domain/controller/controllerHabitacion.dart';
 import 'package:fasthotel/domain/controller/controllerHotel.dart';
 import 'package:fasthotel/ui/content/hotel/listHabicaciones.dart';
-import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
 import 'package:fasthotel/ui/content/hotel/pageResenasH.dart';
+import 'package:fasthotel/ui/content/hotel/pageHomeH.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
@@ -31,23 +31,22 @@ class _ProfileState extends State<Profile> {
     });
   }
 
+  cargarHotel() {
+    controlh.searchHotels(dato).then((value) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) => const HomePageH(),
+        ),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     if (idexh != 2) {
+      cargarHotel();
       cargarVista();
-    }
-
-    print("es ${controlh.listarHotels!.length}");
-    if (controlh.listarHotels!.length == 0) {
-      print(idexh);
-      controlh.searchHotels(dato).then((value) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => const HomePageH(),
-          ),
-        );
-      });
     }
 
     return Scaffold(
@@ -80,11 +79,10 @@ class _ProfileState extends State<Profile> {
           ),
           Container(
             child: Text(
-              controlh.listarHotels![0].descripcion.isEmpty
-                  ? "No hay una descripcion actualmente"
-                  : controlh.listarHotels![0].direccion,
+              controlh.listarHotels![0].descripcion,
               style: TextStyle(
-                color: controlh.listarHotels![0].direccion.isEmpty
+                color: controlh.listarHotels![0].descripcion ==
+                        'No hay una descripcion'
                     ? Colors.grey
                     : Colors.black,
                 fontFamily: "alkreg",
@@ -101,6 +99,60 @@ class _ProfileState extends State<Profile> {
               ),
             ),
           ),
+          Container(
+            alignment: Alignment.center,
+            child: controlh.listarHotels![0].estadohabitaciones ==
+                    'No Generadas'
+                ? OutlinedButton(
+                    onPressed: () {
+                      controlh.generarHabitaciones(
+                          dato, controlh.listarHotels![0].habitaciones);
+                      Get.snackbar(
+                          'Habitación', controlh.listaMensajes![0].mensaje,
+                          duration: const Duration(seconds: 3),
+                          icon: const Icon(Icons.info),
+                          shouldIconPulse: true,
+                          backgroundColor: controlh.listaMensajes![0].mensaje ==
+                                  'Las habitaciones han sido generadas'
+                              ? Colors.green
+                              : Colors.red);
+                      if (controlh.listaMensajes![0].mensaje ==
+                          'Las habitaciones han sido generadas') {
+                        setState(() {
+                          controlh.listarHotels![0].estadohabitaciones =
+                              'Generadas';
+                        });
+                      }
+                      // cargarHotel();
+                    },
+                    child: Text(
+                      "Generar Habitaciones",
+                      style: TextStyle(
+                        color: Colors.yellow,
+                        fontFamily: "alkreg",
+                        fontSize: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                    ),
+                  )
+                : OutlinedButton(
+                    onPressed: () {
+                      Get.snackbar('Habitaciones',
+                          "Las habitaciones ya han sido generadas",
+                          duration: const Duration(seconds: 3),
+                          icon: const Icon(Icons.info),
+                          shouldIconPulse: true,
+                          backgroundColor: Colors.green);
+                    },
+                    child: Text(
+                      "Habitaciones Generadas",
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontFamily: "alkreg",
+                        fontSize: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                    ),
+                  ),
+          ),
           Expanded(
             child: Container(
               alignment: Alignment.center,
@@ -108,26 +160,6 @@ class _ProfileState extends State<Profile> {
                 alignment: WrapAlignment.center,
                 spacing: 10,
                 children: [
-                  OutlinedButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Cambiar foto",
-                      style: TextStyle(
-                        fontFamily: "alkreg",
-                        fontSize: MediaQuery.of(context).size.height * 0.02,
-                      ),
-                    ),
-                  ),
-                  OutlinedButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Actualizar datos",
-                      style: TextStyle(
-                        fontFamily: "alkreg",
-                        fontSize: MediaQuery.of(context).size.height * 0.02,
-                      ),
-                    ),
-                  ),
                   OutlinedButton(
                     onPressed: () {
                       showDialog(
@@ -159,6 +191,7 @@ class _ProfileState extends State<Profile> {
                     child: Text(
                       "Modificar descripción",
                       style: TextStyle(
+                        color: Colors.black,
                         fontFamily: "alkreg",
                         fontSize: MediaQuery.of(context).size.height * 0.02,
                       ),
@@ -177,8 +210,31 @@ class _ProfileState extends State<Profile> {
                           );
                     },
                     child: Text(
-                      "Listar habitaciones",
+                      "Ver habitaciones",
                       style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: "alkreg",
+                        fontSize: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                    ),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Cambiar foto",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: "alkreg",
+                        fontSize: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                    ),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Actualizar datos",
+                      style: TextStyle(
+                        color: Colors.black,
                         fontFamily: "alkreg",
                         fontSize: MediaQuery.of(context).size.height * 0.02,
                       ),
@@ -189,6 +245,7 @@ class _ProfileState extends State<Profile> {
                     child: Text(
                       "Cambiar contraseña",
                       style: TextStyle(
+                        color: Colors.black,
                         fontFamily: "alkreg",
                         fontSize: MediaQuery.of(context).size.height * 0.02,
                       ),

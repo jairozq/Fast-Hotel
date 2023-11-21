@@ -4,13 +4,15 @@ class Hotel {
   late String descripcion;
   late int habitaciones;
   late String imagen;
+  late String estadohabitaciones;
 
   Hotel(
       {required this.direccion,
       required this.nombre,
       required this.descripcion,
       required this.habitaciones,
-      required this.imagen});
+      required this.imagen,
+      required this.estadohabitaciones});
 
   factory Hotel.desdeJson(Map<String, dynamic> jsonMap) {
     return Hotel(
@@ -19,6 +21,7 @@ class Hotel {
       descripcion: jsonMap['descripcion'],
       habitaciones: int.parse(jsonMap['nhabitaciones']),
       imagen: jsonMap['imagen'],
+      estadohabitaciones: jsonMap['estadohabitaciones'],
     );
   }
 }

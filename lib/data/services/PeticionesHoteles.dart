@@ -17,6 +17,24 @@ class PeticionesHotel {
     return compute(convertirAlista, response.body);
   }
 
+  static Future<List<Mensajes>> generarHabitaciones(
+      String direccion, String nhabitacion) async {
+    var url = Uri.parse(
+        "https://fatshotel.000webhostapp.com/generaraHabitaciones.php");
+    final response = await http
+        .post(url, body: {'idhotel': direccion, 'nhabitacion': nhabitacion});
+    print("genera habitacion: " + response.body);
+    return compute(convertirAlista, response.body);
+  }
+
+  static Future<List<Mensajes>> cambiarEstadoHoteles(String direccion) async {
+    var url = Uri.parse(
+        "https://fatshotel.000webhostapp.com/cambiarEstadoHoteles.php");
+    final response = await http.post(url, body: {'idhotel': direccion});
+    print("cambia estado: " + response.body);
+    return compute(convertirAlista, response.body);
+  }
+
   static List<Mensajes> convertirAlista(String responsebody) {
     final pasar = json.decode(responsebody).cast<Map<String, dynamic>>();
     return pasar.map<Mensajes>((json) => Mensajes.desdeJson(json)).toList();

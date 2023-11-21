@@ -1,4 +1,5 @@
 class Habitaciones {
+  late String id;
   late String numero;
   late String idhotel;
   late String servicios;
@@ -8,6 +9,7 @@ class Habitaciones {
   late String estado;
 
   Habitaciones({
+    required this.id,
     required this.numero,
     required this.idhotel,
     required this.servicios,
@@ -19,6 +21,7 @@ class Habitaciones {
 
   factory Habitaciones.desdeJson(Map<String, dynamic> jsonMap) {
     return Habitaciones(
+      id: (jsonMap['id']),
       numero: (jsonMap['numero']),
       idhotel: jsonMap['idhotel'],
       servicios: jsonMap['servicios'],

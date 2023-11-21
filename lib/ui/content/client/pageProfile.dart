@@ -27,23 +27,22 @@ class _ProfileState extends State<Profile> {
     });
   }
 
+  cargarUsuario() {
+    controlu.buscarUser(dato).then((value) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) => const HomePage(),
+        ),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     if (idex != 2) {
+      cargarUsuario();
       cargarVista();
-    }
-
-    print("es ${controlu.listaUserLogin!.length}");
-    if (controlu.listaUserLogin!.length == 0) {
-      print(idex);
-      controlu.buscarUser(dato).then((value) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => const HomePage(),
-          ),
-        );
-      });
     }
 
     return Scaffold(
@@ -59,12 +58,10 @@ class _ProfileState extends State<Profile> {
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.cyan, width: 7),
                 borderRadius: BorderRadius.all(Radius.circular(100))),
-            child: controlu.listaUserLogin![0].imagen.isEmpty
-                ? CircleAvatar(
-                    child: IconButton(
-                      icon: Icon(Icons.add_a_photo_rounded),
-                      onPressed: () {},
-                    ),
+            child: controlu.listaUserLogin![0].imagen == "No"
+                ? IconButton(
+                    icon: Icon(Icons.add_a_photo_rounded, size: 80),
+                    onPressed: () {},
                   )
                 : CircleAvatar(
                     backgroundImage: MemoryImage(
@@ -102,6 +99,7 @@ class _ProfileState extends State<Profile> {
                     child: Text(
                       "Cambiar foto",
                       style: TextStyle(
+                        color: Colors.black,
                         fontFamily: "alkreg",
                         fontSize: MediaQuery.of(context).size.height * 0.02,
                       ),
@@ -112,6 +110,7 @@ class _ProfileState extends State<Profile> {
                     child: Text(
                       "Actualizar datos",
                       style: TextStyle(
+                        color: Colors.black,
                         fontFamily: "alkreg",
                         fontSize: MediaQuery.of(context).size.height * 0.02,
                       ),
@@ -122,6 +121,7 @@ class _ProfileState extends State<Profile> {
                     child: Text(
                       "Cambiar contraseña",
                       style: TextStyle(
+                        color: Colors.black,
                         fontFamily: "alkreg",
                         fontSize: MediaQuery.of(context).size.height * 0.02,
                       ),

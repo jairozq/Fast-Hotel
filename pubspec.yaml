@@ -81,6 +81,34 @@ flutter:
     - assets/images/fondologin.png
     - assets/images/fondoRH.png
     - assets/images/fondoRC.png
+    - assets/images/NoAvatar.png
+    - assets/services/SLimpieza.png
+    - assets/services/SRestaurante.png
+    - assets/services/SHabitacion.png
+    - assets/services/SBar.png
+    - assets/services/SRecepcion.png
+    - assets/services/SInformacion.png
+    - assets/services/SPiscina.png
+    - assets/services/SGimnasio.png
+    - assets/services/SSpa.png
+    - assets/services/SInstDeportivas.png
+    - assets/services/SSalasR.jpg
+    - assets/services/SSalasE.png
+    - assets/services/SWifi.png
+    - assets/services/STV.png
+    - assets/services/STransporte.png
+    - assets/services/SEstacionamiento.png
+    - assets/services/SPapeleria.png
+    - assets/services/SSeguridad.png
+    - assets/services/SCaja.png
+    - assets/services/SCuidadoN.png
+    - assets/services/SActividadesN.png
+    - assets/services/SMascotas.png
+    - assets/services/SLavanteria.png
+    - assets/services/SMedicos.png
+    - assets/services/SMinibar.png
+    - assets/services/SClimatizacion.png
+    - assets/services/SAccesibilidad.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
