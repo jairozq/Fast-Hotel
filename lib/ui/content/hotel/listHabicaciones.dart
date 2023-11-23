@@ -2,6 +2,7 @@ import 'package:fasthotel/domain/controller/controllerHabitacion.dart';
 import 'package:fasthotel/domain/controller/controllerServicios.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:convert';
 
 class ListHabitaciones extends StatefulWidget {
   const ListHabitaciones({super.key});
@@ -12,8 +13,13 @@ class ListHabitaciones extends StatefulWidget {
 
 class _ListHabitacionesState extends State<ListHabitaciones> {
   ControlHabitaciones controlc = Get.put(ControlHabitaciones());
-  ControlServicios controls = Get.find();
-  // ControlServicios controls = Get.put(ControlServicios());
+  ControlServicios controls = Get.put(ControlServicios());
+
+  decodeimage(imagen) {
+    var imagen64 = (imagen).split(",")[1];
+    var foto = base64Decode(imagen64);
+    return foto;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +38,10 @@ class _ListHabitacionesState extends State<ListHabitaciones> {
             int tamListServicesL = controls.listarServiciosL!.length;
             int tamListServices = servicios.length;
 
-            print("lista servicios locales: $tamListServicesL");
-            // print("lista servicios: ${controls.listarServiciosL}");
-
             return Container(
               alignment: AlignmentDirectional.center,
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.15,
+              height: MediaQuery.of(context).size.height * 0.28,
               child: Card(
                 child: Column(
                   children: [
@@ -73,15 +76,29 @@ class _ListHabitacionesState extends State<ListHabitaciones> {
                         ),
                       ],
                     ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.001,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Servicios de la habitación",
+                          style: TextStyle(
+                            fontFamily: "alkreg",
+                          ),
+                        ),
+                      ],
+                    ),
                     controlc.listarHabitaciones![index].servicios ==
                             "No hay servicios"
                         ? Row(
+                            // mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                decoration: BoxDecoration(border: Border.all()),
-                                width: MediaQuery.of(context).size.width * 0.59,
+                                alignment: AlignmentDirectional.centerStart,
+                                width: MediaQuery.of(context).size.width * 0.9,
                                 height:
-                                    MediaQuery.of(context).size.height * 0.03,
+                                    MediaQuery.of(context).size.height * 0.065,
                                 child: Text(
                                   controlc.listarHabitaciones![index].servicios,
                                   style: TextStyle(
@@ -93,29 +110,140 @@ class _ListHabitacionesState extends State<ListHabitaciones> {
                             ],
                           )
                         : Container(
-                            decoration: BoxDecoration(border: Border.all()),
                             width: MediaQuery.of(context).size.width,
                             height: MediaQuery.of(context).size.height * 0.065,
                             child: ListView(
                               scrollDirection: Axis.horizontal,
                               children: [
-                                // Image.asset("${controls.listarServiciosL![index + 1].icon}"),
-                                Icon(Icons.add),
                                 for (int i = 0; i < tamListServices; i++)
                                   for (int j = 0; j < tamListServicesL; j++)
                                     if (int.parse(servicios[i]) ==
                                         controls.listarServiciosL![j].id)
-                                      Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.05,
-                                        child: Image.asset(
-                                          controls.listarServiciosL![i].icon,
+                                      InkWell(
+                                        onTap: () {
+                                          AlertDialog(
+                                            title: Text(controls
+                                                .listarServiciosL![j].nombre),
+                                            content: Text(controls
+                                                .listarServiciosL![j]
+                                                .descripcion),
+                                            actions: [
+                                              OutlinedButton(
+                                                  child: Text("Cerrar"),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  }),
+                                            ],
+                                          );
+                                        },
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.05,
+                                          child: Image.asset(
+                                            controls.listarServiciosL![i].icon,
+                                          ),
                                         ),
                                       ),
                               ],
                             ),
                           ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.015,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Presione para agregar o cambiar una foto",
+                          style: TextStyle(
+                            fontFamily: "alkreg",
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {},
+                          child: controlc.listarHabitaciones![index].foto ==
+                                  "No"
+                              ? Container(
+                                  decoration:
+                                      BoxDecoration(border: Border.all()),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.15,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.07,
+                                  child: Icon(Icons.add_a_photo_rounded),
+                                )
+                              : Container(
+                                  decoration:
+                                      BoxDecoration(border: Border.all()),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.15,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.07,
+                                  child: Image.memory(
+                                    decodeimage(controlc
+                                        .listarHabitaciones![index].foto),
+                                  ),
+                                ),
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: controlc.listarHabitaciones![index].foto2 ==
+                                  "No"
+                              ? Container(
+                                  decoration:
+                                      BoxDecoration(border: Border.all()),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.15,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.07,
+                                  child: Icon(Icons.add_a_photo_rounded),
+                                )
+                              : Container(
+                                  decoration:
+                                      BoxDecoration(border: Border.all()),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.15,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.07,
+                                  child: Image.memory(
+                                    decodeimage(controlc
+                                        .listarHabitaciones![index].foto2),
+                                  ),
+                                ),
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: controlc.listarHabitaciones![index].foto3 ==
+                                  "No"
+                              ? Container(
+                                  decoration:
+                                      BoxDecoration(border: Border.all()),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.15,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.07,
+                                  child: Icon(Icons.add_a_photo_rounded),
+                                )
+                              : Container(
+                                  decoration:
+                                      BoxDecoration(border: Border.all()),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.15,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.07,
+                                  child: Image.memory(
+                                    decodeimage(controlc
+                                        .listarHabitaciones![index].foto3),
+                                  ),
+                                ),
+                        ),
+                      ],
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -124,7 +252,55 @@ class _ListHabitacionesState extends State<ListHabitaciones> {
                           height: MediaQuery.of(context).size.height * 0.03,
                           child: OutlinedButton(
                             onPressed: () {
-                              print("object");
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: Text(
+                                      'Seleccione el servicio que desea agrear',
+                                      style: TextStyle(
+                                          wordSpacing:
+                                              BorderSide.strokeAlignCenter,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.038,
+                                          fontFamily: 'alkreg'),
+                                    ),
+                                    actions: <Widget>[
+                                      Container(
+                                        decoration:
+                                            BoxDecoration(border: Border.all()),
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.68,
+                                        child: Wrap(
+                                          spacing: Checkbox.width,
+                                          children: [
+                                            for (int j = 0;
+                                                j < tamListServicesL;
+                                                j++)
+                                              if (controls.listarServiciosL![j]
+                                                      .tiposervicio ==
+                                                  "Habitacion")
+                                                Container(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.05,
+                                                  child: Image.asset(
+                                                    controls
+                                                        .listarServiciosL![j]
+                                                        .icon,
+                                                  ),
+                                                ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                             },
                             style: ButtonStyle(
                                 backgroundColor:

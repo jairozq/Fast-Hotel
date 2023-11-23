@@ -4,9 +4,15 @@ import 'package:fasthotel/domain/models/utiles.dart';
 import 'package:get/get.dart';
 
 class ControlServicios extends GetxController {
-  final Rxn<List<Servicios>> _listarServiciosL = Rxn<List<Servicios>>([]);
+  Rx<List<Servicios>> _listarServiciosL = Rx<List<Servicios>>([]);
   final Rxn<List<Servicios>> _listarServicios = Rxn<List<Servicios>>([]);
   final Rxn<List<Mensajes>> _listarMensajes = Rxn<List<Mensajes>>([]);
+
+  @override
+  void onInit() {
+    _listarServiciosL.value = servicios;
+    super.onInit();
+  }
 
   Future<void> agregarServicios(
       String numero, String idhotel, String listservices) async {
@@ -17,12 +23,6 @@ class ControlServicios extends GetxController {
   Future<void> listarServicios(String numero, String idhotel) async {
     _listarServicios.value =
         await PeticionesServicios.listarServicios(numero, idhotel);
-  }
-
-  @override
-  void onInit() {
-    _listarServiciosL.value = servicios;
-    super.onInit();
   }
 
   List<Mensajes>? get listaMensajes => _listarMensajes.value;
